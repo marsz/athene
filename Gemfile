@@ -5,8 +5,8 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
+gem 'mysql2'
+gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,7 +27,16 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
+group :test,:development do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem "rspec"
+  gem "rspec-rails"
+  gem "shoulda-matchers"
+  gem "watchr"
+  gem "factory_girl_rails"
 end
+
+gem 'capistrano'
+gem 'rest-client'
+gem 'whenever', :require => false

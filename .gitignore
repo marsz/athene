@@ -5,3 +5,4 @@ tmp/
 .sass-cache/
 config/database.yml
 lib/tasks/import.rake
+config/medusa.yml
