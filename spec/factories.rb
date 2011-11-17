@@ -17,3 +17,13 @@ Factory.define :post do |f|
   f.url "http://blog.marsz.tw/12345678"
 end
 
+Factory.define :users_monitor_url do |f|
+  f.url "http://www.google.com"
+  f.label "google"
+  f.is_enabled true
+end
+
+Factory.define :users_monitor_parser do |f|
+  f.regex "href=\"([^\"]+)\""
+  f.label "google"
+end
