@@ -1,0 +1,6 @@
+development:
+  token: ""
+test:
+  token: ""
+production:
+  token: ""
