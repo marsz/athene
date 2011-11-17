@@ -21,3 +21,7 @@
 every 2.hours do
   runner "Crawlers::Wretch.new.monitor_users"
 end
+
+every .hours do
+  runner "Crawlers::Wretch.new.monitor_all_users_posts"
+end
