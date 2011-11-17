@@ -10,4 +10,5 @@ describe Site do
   it {should validate_presence_of(:domain)}
   it {should validate_uniqueness_of(:domain)}
   it {should validate_format_of(:domain).with(/[a-z\-]+/)}
+  it {should have_many(:users_monitor_urls)}
 end
