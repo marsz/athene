@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
-  belongs_to :site
-  belongs_to :user
+  belongs_to :site, :counter_cache => true
+  belongs_to :user, :counter_cache => true
   validates_uniqueness_of :site_post_id, :scope => [:site_id]
   validates_presence_of :site_id
   validates_presence_of :site_post_id

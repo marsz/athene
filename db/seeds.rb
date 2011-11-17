@@ -6,4 +6,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-wretch = Site.create({:name => "無名小站", :domain => :wretch, :url => "http://www.wretch.cc"})
+Crawlers.subclasses.each do |klass|
+  klass.new.seed
+end
