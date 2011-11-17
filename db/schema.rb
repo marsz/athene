@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111114061122) do
+ActiveRecord::Schema.define(:version => 20111114080243) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -44,6 +44,25 @@ ActiveRecord::Schema.define(:version => 20111114061122) do
     t.string   "name"
     t.text     "url"
     t.integer  "posts_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users_monitor_parsers", :force => true do |t|
+    t.string   "label"
+    t.string   "regex"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users_monitor_urls", :force => true do |t|
+    t.text     "url"
+    t.integer  "parser_id"
+    t.string   "label"
+    t.integer  "site_id"
+    t.datetime "monitored_at"
+    t.boolean  "is_enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
