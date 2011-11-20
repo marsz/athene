@@ -1,0 +1,5 @@
+seed_sites:
+  wretch: 
+    name: "無名小站"
+    url: "http://www.wretch.cc"
+    domain: "wretch"

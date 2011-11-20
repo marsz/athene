@@ -19,5 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 every 2.hours do
-  runner "Crawlers::Wretch.new.monitor_users"
+  rake "cron:monitor_users:wretch"
+end
+
+every 6.hours do
+  rake "cron:monitor_posts:wretch"
 end
