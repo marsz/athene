@@ -1,4 +1,4 @@
-seed_sites = [:wretch]
+seed_sites = [:wretch,:pixnet]
 namespace :cron do
   namespace :monitor_users do
     seed_sites.each do |domain|

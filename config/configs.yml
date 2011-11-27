@@ -3,3 +3,7 @@ seed_sites:
     name: "無名小站"
     url: "http://www.wretch.cc"
     domain: "wretch"
+  pixnet: 
+    name: "痞客邦"
+    url: "http://www.pixnet.net"
+    domain: "pixnet"
