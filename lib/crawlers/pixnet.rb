@@ -37,7 +37,7 @@ class Crawlers::Pixnet
   # monitor post end
   # monitor users start
   def parse_site_user_id_from_url url
-    url.scan(/http:\/\/([^\.]+).pixnet.net/)[0][0] rescue (url.scan(/http:\/\/([^\/]+)/)[0][0] rescue nil)
+    url.scan(/http:\/\/([^\.]+).pixnet.net/)[0][0].downcase rescue (url.scan(/http:\/\/([^\/]+)/)[0][0].downcase rescue nil)
   end
   # monitor users end
   protected

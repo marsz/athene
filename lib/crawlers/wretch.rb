@@ -31,7 +31,7 @@ class Crawlers::Wretch
   # monitor post end
   # monitor users start
   def parse_site_user_id_from_url url
-    url.scan(/cc\/blog\/([^\/]+)/)[0][0] rescue nil
+    url.scan(/cc\/blog\/([^\/]+)/)[0][0].downcase rescue nil
   end
   # monitor users end
   protected
