@@ -34,9 +34,4 @@ describe Post do
     end
   end
   
-  it "title's html should be striped" do
-    @post.title = "foo <b class=\"ff\">bar</b><br/><br /><br / >"
-    @post.save
-    @post.title.should == "foo bar"
-  end
 end
