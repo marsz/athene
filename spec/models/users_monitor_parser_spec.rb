@@ -11,5 +11,10 @@ describe UsersMonitorParser do
   it {should validate_presence_of(:site_id)}
   it {should validate_presence_of(:label)}
   
-  pending "to_regex"
+  it "to_regex" do
+    @users_monitor_parser.regex = "/xxx/m"
+    @users_monitor_parser.to_regex.is_a?(Regexp) == true
+    @users_monitor_parser.regex = "xxx"
+    @users_monitor_parser.to_regex.is_a?(Regexp) == true
+  end
 end
