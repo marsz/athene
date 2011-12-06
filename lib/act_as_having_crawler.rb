@@ -1,5 +1,8 @@
 module ActAsHavingCrawler
   extend ActiveSupport::Concern
+  
+  CRAWLERS = Configs[:seed_sites].map{|name,tmps| "Crawlers::#{name.to_s.camelize}".constantize}
+  
   module ClassMethods
     def find_by_url(url)
       Site.all.each do |site|
