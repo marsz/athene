@@ -7,5 +7,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Site::CRAWLERS.each do |klass|
-  klass.new.seed
+  klass.seed
 end

@@ -2,15 +2,20 @@ module ActAsCrawler
   extend ActiveSupport::Concern
   include ActAsFetcher
   module ClassMethods
+    def seed
+      result = {}
+      instance = self.new
+      result[:site] = instance.seed_site
+      result[:users_monitor_parser] = instance.seed_users_monitor_parser(result[:site])
+      result[:users_monitor_urls] = instance.seed_users_monitor_urls(result[:users_monitor_parser])
+      result
+    end
   end
   module InstanceMethods
     def initialize site = nil
       @site = site 
     end
-    def seed
-      parser = seed_users_monitor_parser(seed_site)
-      seed_users_monitor_urls(parser)
-    end
+    
     def seed_site
       if !@site
         site_hash = Configs[:seed_sites][self.class.to_s.split("::").pop.underscore]
