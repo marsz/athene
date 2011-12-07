@@ -27,6 +27,22 @@ module ActAsCrawler
       UsersMonitorParser.find_by_label(users_monitor_parser_hash[:label]) || UsersMonitorParser.create(users_monitor_parser_hash.merge(:site=>site))
     end
     
+    def monitor_users
+      new_users = []
+      @site.users_monitor_urls.enabled.each do |users_monitor_url|
+        patt = users_monitor_url.parser.to_regex
+        fetch(users_monitor_url.url).scan(patt).each do |tmps|
+          u = User.new_by_url(tmps[0],:name=>tmps[1], :site => users_monitor_url.site)
+          if u && u.new_record?
+            u.save
+            new_users << u
+          end
+        end
+        users_monitor_url.monitored
+      end
+      new_users
+    end
+    
     def posts_urls_by_user user
       raise "not implement"
     end
