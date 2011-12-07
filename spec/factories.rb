@@ -1,29 +1,34 @@
-Factory.define :site do |f|
-  f.name "marsz"
-  f.domain "www.marsz.tw"
-  f.url "http://www.marsz.tw"
-end
+FactoryGirl.define do
+  factory :site do
+    name "marsz"
+    domain "wretch"
+    url "http://www.marsz.tw"
+    factory :site_another do
+      domain "pixnet"
+    end
+  end
 
-Factory.define :user do |f|
-  f.site_user_id "marsz"
-  f.name "MarsZ Chen"
-  f.url "http://blog.marsz.tw"
-end
+  factory :user do
+    site_user_id "marsz"
+    name "MarsZ Chen"
+    url "http://blog.marsz.tw"
+  end
 
-Factory.define :post do |f|
-  f.site_post_id "12345678"
-  f.title "hahahah"
-  f.date Time.now.to_date
-  f.url "http://blog.marsz.tw/12345678"
-end
+  factory :post do
+    site_post_id "12345678"
+    title "hahahah"
+    date Time.now.to_date
+    url "http://blog.marsz.tw/12345678"
+  end
 
-Factory.define :users_monitor_url do |f|
-  f.url "http://www.google.com"
-  f.label "google"
-  f.is_enabled true
-end
+  factory :users_monitor_url do
+    url "http://www.google.com"
+    label "google"
+    is_enabled true
+  end
 
-Factory.define :users_monitor_parser do |f|
-  f.regex "href=\"([^\"]+)\""
-  f.label "google"
+  factory :users_monitor_parser do
+    regex "/href=\"([^\"]+)\"/m"
+    label "google"
+  end
 end

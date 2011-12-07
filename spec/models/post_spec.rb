@@ -14,6 +14,24 @@ describe Post do
   it {should validate_presence_of(:url)}
   it {should validate_presence_of(:date)}
   it {should validate_presence_of(:title)}
-  pending "sync site id"
-  pending "act as tag stripable"
+  
+  it "sync_site_id" do
+    site_another = Factory :site_another
+    @post.site_id = site_another.id
+    @post.save
+    (@post.site_id == @site.id).should == true
+  end
+
+  describe "new_by_user" do
+    before do
+      @post = Post.new_by_user(@user)
+    end
+    it "user id match" do
+      @post.user_id.should == @user.id
+    end
+    it "site id match" do
+      @post.site_id.should == @site.id
+    end
+  end
+  
 end

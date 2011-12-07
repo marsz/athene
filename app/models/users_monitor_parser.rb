@@ -6,6 +6,6 @@ class UsersMonitorParser < ActiveRecord::Base
   validates_presence_of :label
   
   def to_regex
-    eval(self.regex)
+    eval(self.regex) rescue Regexp.new(self.regex)
   end
 end
