@@ -28,7 +28,7 @@ FactoryGirl.define do
   end
 
   factory :users_monitor_parser do
-    regex "href=\"([^\"]+)\""
+    regex "/href=\"([^\"]+)\"/m"
     label "google"
   end
 end

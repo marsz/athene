@@ -1,0 +1,22 @@
+urls_for_find_site:
+  - "http://www.wretch.cc/blog/marsz"
+  - "http://www.wretch.cc/blog/marsz/22047741"
+users_urls:
+  - "http://www.wretch.cc/blog/?tab=cat&sort=ave&class_id=30&main=25"
+  - "http://www.wretch.cc/blog/?tab=cat&class_id=25"
+user:
+  site_user_id: "bajenny"
+post_urls:
+  - "http://www.wretch.cc/blog/bajenny/16520595"
+  - "http://www.wretch.cc/blog/marsz/22047741#postComments"
+  - "http://www.wretch.cc/blog/marsz/22047741"
+posts_urls:
+  -
+    url: "http://www.wretch.cc/blog/marsz&list=1"
+    size: 1
+  -
+    url: "http://www.wretch.cc/blog/bajenny&list=1"
+    size: 4
+user_posts:  
+  url: "http://www.wretch.cc/blog/marsz&list=1"
+  size: 100

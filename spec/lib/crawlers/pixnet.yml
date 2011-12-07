@@ -1,0 +1,25 @@
+urls_for_find_site:
+  - "http://marsz.pixnet.net"
+  - "http://marsz.pixnet.net/"
+  - "http://marsz.pixnet.net/blog"
+  - "http://marsz.pixnet.net/blog/post/35208375"
+users_urls:
+  - "http://www.pixnet.net/blog/article/4/3"
+  - "http://www.pixnet.net/blog/article/4/3/hot"
+  - "http://www.pixnet.net/blog/article/4/3/hot/2"
+user:
+  site_user_id: "marsz"
+post_urls:
+  - "http://marsz.pixnet.net/blog/post/28379032"
+  - "http://marsz.pixnet.net/blog/post/28379032#comments"
+  - "http://www.giddens.tw/blog/post/35613773"
+posts_urls:
+  -
+    url: "http://www.giddens.tw/blog/listall/1"
+    size: 32
+  -
+    url: "http://marsz.pixnet.net/blog/listall"
+    size: 4
+user_posts:  
+  url: "http://marsz.pixnet.net/blog/listall/1"
+  size: 30

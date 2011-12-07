@@ -9,6 +9,7 @@ module ActAsHavingCrawler
       Site.all.each do |site|
         return site if site.crawler.parse_site_user_id_from_url(url)
       end
+      nil
     end
   end
   module InstanceMethods

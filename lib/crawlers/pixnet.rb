@@ -2,7 +2,10 @@
 class Crawlers::Pixnet
   include ActAsCrawler
   
+  REGEXP_POSTS_PAGE_NUMBER = /<a href=".+?blog\/listall\/([0-9]+)" class="">/m
+  
   # monitor post start
+  
   def posts_urls_by_user user
     urls = []
     current_url = url_posts(user)
@@ -17,9 +20,9 @@ class Crawlers::Pixnet
     end
     urls
   end
-  def url_posts user, options = {}
+  def url_posts user, page = 0
     domain = user.site_user_id.index(".") ? user.site_user_id : "#{user.site_user_id}.pixnet.net"
-    "http://#{domain}/blog/listall/"+(options[:page] ? options[:page].to_s : "")
+    "http://#{domain}/blog/listall"+(page > 0 ? "/#{page}" : "")
   end
   def parse_posts_from_posts_page content
     posts = []
@@ -40,12 +43,7 @@ class Crawlers::Pixnet
     url.scan(/http:\/\/([^\.]+).pixnet.net/)[0][0].downcase rescue (url.scan(/http:\/\/([^\/]+)/)[0][0].downcase rescue nil)
   end
   # monitor users end
-  protected
-  def users_monitor_parser_hash
-    {:label => "pixnet-user_monitor",
-     :regex => '/<li class="grid\-author"><a href="([^"]+)" target="_blank">(.+?)<\/a>/m'
-    }
-  end
+  
   def seed_users_monitor_urls parser
     res = {}
     RestClient.get("http://www.pixnet.net/blog").scan(/<li class="article\-list\-menu" id="article\-list\-menu\-[0-9]+"><a href="([^"]+)">(.+?)<\/a><\/li>/m).each do |tmps|
@@ -70,4 +68,13 @@ class Crawlers::Pixnet
     end
     urls
   end
+    
+  protected
+  
+  def users_monitor_parser_hash
+    {:label => "pixnet-user_monitor",
+     :regex => '/<li class="grid\-author"><a href="([^"]+)" target="_blank">(.+?)<\/a>/m'
+    }
+  end
+
 end
