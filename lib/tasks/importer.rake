@@ -28,6 +28,7 @@ namespace :importer do
         end
         puts ((site.nil? || user.nil? || post.nil?)?  "!!!!! page: #{page}, index: #{index}" : "---- post: #{post.id}")
       end
+      page += 1
     end
   end
   task :users  => :environment do
