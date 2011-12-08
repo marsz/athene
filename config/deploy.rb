@@ -36,10 +36,15 @@ namespace :deploy do
   end
 end
 
+task :seed_data, :roles => :app do
+  run "cd #{current_path};bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+end
+
 task :tail_log, :roles => :app do
   run "tail -f #{shared_path}/log/#{rails_env}.log"
 end
 
 before "deploy:assets:precompile", "deploy:symlink_shared"
+before "deploy:migrate", "deploy:symlink_shared"
 after "deploy", "deploy:cleanup"
 after "deploy:migrations", "deploy:cleanup"
