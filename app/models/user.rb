@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :posts, :order => "date DESC,datetime DESC"
   
   def self.new_by_url(url, hash = {})
-    if site = Site.find_by_url(url)
+    if site = (hash[:site] || Site.find_by_url(url))
       user = User.new(hash)
       user.site = site
       user.site_user_id = site.crawler.parse_site_user_id_from_url(url)

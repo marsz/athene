@@ -1,6 +1,6 @@
 class Site < ActiveRecord::Base
+  include ActAsFetcher
   include ActAsHavingCrawler
-  include ActAsMonitorUsers
   
   validates_format_of :domain, :with => /[a-z\-]+/
   validates_uniqueness_of :domain
