@@ -16,12 +16,11 @@ namespace :importer do
          content = nil
       end
     end
+    content
   end
-  task :posts, :start do |t, args|
+  task :posts => :environment do |t, args|
     url = "http://athene.marsz.tw/Api/Article/search.json?api_key=1234&limit=1000"
-    page = args[:start] || 0
-    page = page.to_i
-    puts page
+    page = 0
     keep = true
     while(keep) do
       result = ActiveSupport::JSON.decode(fetch("#{url}&page=#{page}"))
