@@ -9,5 +9,6 @@ class Site < ActiveRecord::Base
   validates_presence_of :domain
   has_many :users_monitor_urls, :include => [:parser]
   has_many :users
+  has_many :posts
   
 end

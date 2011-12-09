@@ -1,0 +1,20 @@
+%ul
+  = @yesterday
+  %li
+    = "new users: #{@report[:new_users]}"
+  %li
+    = "new posts: #{@report[:new_posts]}"
+  %li
+    = "total users: #{@report[:total_users]}"
+  %li
+    = "total posts: #{@report[:total_posts]}"
+- @report[:sites].each do |site|
+  %hr
+  %ul
+    = site[:name]
+    %li
+      = "new users: "
+      = site[:total_new_users]
+    %li
+      = "new posts: "
+      = site[:total_new_posts]

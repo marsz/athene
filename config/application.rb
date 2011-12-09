@@ -29,10 +29,12 @@ module Athene
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Taipei'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.i18n.default_locale = 'tw'
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -45,5 +47,11 @@ module Athene
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    email_config = YAML.load(File.open("#{Rails.root}/config/email.yml"))[Rails.env]
+    if email_config
+      config.action_mailer.default_url_options = { :host => email_config[:host] }
+      config.action_mailer.smtp_settings = email_config[:smtp]
+    end
   end
 end
