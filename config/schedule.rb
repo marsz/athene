@@ -31,3 +31,7 @@ end
 every 8.hours do
   rake "cron:builder:trigger"
 end
+
+every 1.day, :at => "am 07:00" do
+  rake "report:daily"
+end
