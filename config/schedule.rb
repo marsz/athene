@@ -27,3 +27,7 @@ every 6.hours do
   rake "cron:monitor_posts:wretch"
   rake "cron:monitor_posts:pixnet"
 end
+
+every 8.hours do
+  rake "cron:builder:trigger"
+end

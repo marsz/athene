@@ -28,7 +28,8 @@ namespace :deploy do
   task :symlink_shared, :roles => [:app] do
     symlink_hash = {
       "#{shared_path}/config/database.yml" => "#{release_path}/config/database.yml",
-      "#{shared_path}/config/medusa.yml" => "#{release_path}/config/medusa.yml"
+      "#{shared_path}/config/medusa.yml" => "#{release_path}/config/medusa.yml",
+      "#{shared_path}/config/builder.yml" => "#{release_path}/config/builder.yml",
     }
     symlink_hash.each do |source, target|
       run "cp #{source} #{target}"

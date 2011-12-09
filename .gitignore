@@ -6,3 +6,4 @@ tmp/
 config/database.yml
 lib/tasks/import.rake
 config/medusa.yml
+config/builder.yml
