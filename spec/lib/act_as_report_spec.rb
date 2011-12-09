@@ -1,3 +1,5 @@
 require 'spec_helper'
 
-pending "act_as_report.rb"
+describe "act_as_report.rb" do
+  pending "act_as_report.rb"
+end
