@@ -45,5 +45,10 @@ module Athene
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    email_config = YAML.load(File.open("#{Rails.root}/config/email.yml"))[Rails.env]
+    config.action_mailer.default_url_options = { :host => email_config[:host] }
+    config.action_mailer.smtp_settings = email_config[:smtp]
+    
   end
 end
