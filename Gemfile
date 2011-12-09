@@ -42,3 +42,4 @@ end
 gem 'capistrano'
 gem 'rest-client'
 gem 'whenever', :require => false
+gem "haml"
