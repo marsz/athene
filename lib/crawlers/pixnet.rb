@@ -6,20 +6,6 @@ class Crawlers::Pixnet
   
   # monitor post start
   
-  def posts_urls_by_user user
-    urls = []
-    current_url = url_posts(user)
-    urls << current_url
-    content = fetch(current_url)
-    content = content.scan(/<div class="page">(.+?)<\/div>/m)[0][0] rescue content
-    total = content.scan(/\/blog\/listall\/([0-9]+)/m).map{|tmps| tmps[0].to_i}.max.to_i
-    if total > 1
-      (2..total).map.each do |page|
-        urls << url_posts(user,:page=>page)
-      end
-    end
-    urls
-  end
   def url_posts user, page = 0
     domain = user.site_user_id.index(".") ? user.site_user_id : "#{user.site_user_id}.pixnet.net"
     "http://#{domain}/blog/listall"+(page > 0 ? "/#{page}" : "")
