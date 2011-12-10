@@ -6,10 +6,13 @@ describe User do
     init_all_data
   end
   it {should belong_to(:site)}
-  it {should have_many(:posts)}
+  it {should have_many(:posts).dependent(:destroy) }
   it {should validate_uniqueness_of(:site_user_id).scoped_to([:site_id])}
   it {should validate_presence_of(:site_id)}
   it {should validate_presence_of(:site_user_id)}
+  it {should validate_format_of(:site_user_id).with("marsz") }
+  it {should validate_format_of(:site_user_id).not_with("marsz\n") }
+  it {should validate_format_of(:site_user_id).not_with("marsz<b>sss") }
   
   describe "new_by_url" do
     before do

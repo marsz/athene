@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :site_user_id, :scope => [:site_id]
   validates_presence_of :site_id
   validates_presence_of :site_user_id
-  has_many :posts, :order => "date DESC,datetime DESC"
+  validates_format_of :site_user_id, :with => /\A[^\n\/\?><]+\z/
+  has_many :posts, :order => "date DESC,datetime DESC", :dependent => :destroy
   
   def self.new_by_url(url, hash = {})
     if site = (hash[:site] || Site.find_by_url(url))
