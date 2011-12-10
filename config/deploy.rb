@@ -30,6 +30,7 @@ namespace :deploy do
       "#{shared_path}/config/database.yml" => "#{release_path}/config/database.yml",
       "#{shared_path}/config/medusa.yml" => "#{release_path}/config/medusa.yml",
       "#{shared_path}/config/builder.yml" => "#{release_path}/config/builder.yml",
+      "#{shared_path}/config/email.yml" => "#{release_path}/config/email.yml"
     }
     symlink_hash.each do |source, target|
       run "cp #{source} #{target}"
