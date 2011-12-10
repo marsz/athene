@@ -18,7 +18,14 @@ namespace :importer do
     end
     content
   end
-  task :posts => :environment do |t, args|
+  task :valid_users => :environment do 
+    User.scoped.each do |u|
+      if !u.save
+        u.destroy
+      end
+    end
+  end
+  task :posts => :environment do
     url = "http://athene.marsz.tw/Api/Article/search.json?api_key=1234&limit=1000"
     page = 0
     keep = true
