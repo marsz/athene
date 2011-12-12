@@ -72,8 +72,9 @@ module ActAsCrawler
       end
       pages.max
     end
-    def posts_urls_by_user user
-      raise "not implement"
+    
+    def check_user_is_enabled(user)
+      self.fetch_status(url_posts(user)) == 200
     end
     
     def url_posts user, page = 0
@@ -95,7 +96,7 @@ module ActAsCrawler
     def seed_users_monitor_urls(parser)
       raise "not implement"
     end
-    
+        
     protected
     
     def users_monitor_parser_hash

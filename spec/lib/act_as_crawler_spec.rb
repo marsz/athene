@@ -87,6 +87,25 @@ shared_examples_for "act_as_crawler" do
       end
     end
   end
+  
+  describe "#check_user_is_enabled" do
+    it "user should enabled" do
+      @data[:users_should_enabled].each do |site_user_id|
+        user = @site.users.build(:site_user_id => site_user_id)
+        user.save.should be_true
+        @crawler.check_user_is_enabled(user).should == true
+      end
+    end
+    
+    it "user should disabled" do
+      @data[:users_should_disabled].each do |site_user_id|
+        user = @site.users.build(:site_user_id => site_user_id)
+        user.save.should be_true
+        @crawler.check_user_is_enabled(user).should == false
+      end
+    end
+  end
+  
 end
 
 describe "crawlers" do

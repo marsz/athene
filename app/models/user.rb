@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
+  include ActAsIsEnabled
+  act_as_is_enabled
+  
   include ActAsMonitorPosts
   act_as_monitor_posts
+  
+  include ActAsUserChecker
+  act_as_user_checker
   
   belongs_to :site, :counter_cache => true
   validates_uniqueness_of :site_user_id, :scope => [:site_id]
