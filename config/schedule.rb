@@ -23,7 +23,7 @@ every 2.hours do
   rake "cron:monitor_users:pixnet"
 end
 
-every 6.hours do
+every 12.hours do
   rake "cron:monitor_posts:wretch"
   rake "cron:monitor_posts:pixnet"
 end
