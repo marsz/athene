@@ -11,7 +11,7 @@ module ActAsFetcher
         request_url = "#{request_url}?#{params.to_query}" 
         params = nil
       end
-      ActiveSupport::JSON.decode(RestClient.method(method).call(request_url, params))["data"]
+      ActiveSupport::JSON.decode(RestClient.method(method).call(request_url, params))["data"].to_s
     end
   end
 end
