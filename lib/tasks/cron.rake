@@ -24,7 +24,8 @@ namespace :cron do
   namespace :monitor_posts do
     seed_sites.each do |domain|
       task domain.to_sym => :environment do
-         Site.find_by_domain(domain.to_s).users.each do |user|
+         Site.find_by_domain(domain.to_s).users.where("monitored_at ASC").each do |user|
+           puts "monitoring user: #{user.id}...."
            user.monitor_posts
          end
       end
