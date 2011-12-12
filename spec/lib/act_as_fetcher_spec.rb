@@ -2,10 +2,22 @@ require 'spec_helper'
 
 shared_examples_for "act_as_fetcher" do
   describe "instance methods" do
+    
     it "can fetch content" do
       @url = "http://www.google.com.tw"
       @obj.fetch(@url).length.should > 0
     end
+    
+    it "can fetch status" do
+      @url = "http://www.google.com.tw"
+      @obj.fetch_status(@url).should == 200
+    end
+    
+    it "can fetch status error" do
+      @url = "http://jim1997913.pixnet.net/blog"
+      @obj.fetch_status(@url).should == 403
+    end
+    
   end
 end
 
