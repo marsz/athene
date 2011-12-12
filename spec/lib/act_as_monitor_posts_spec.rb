@@ -15,6 +15,7 @@ shared_examples_for "act_as_monitor_posts" do
   end
   
   it "monitor posts" do
+    now = Time.now
     posts = @user.monitor_posts
     posts.size.should > 0
     posts.each { |post| post.new_record?.should == false}
@@ -22,6 +23,7 @@ shared_examples_for "act_as_monitor_posts" do
     new_posts = @user.monitor_posts
     new_posts.size.should_not == posts.size
     new_posts.size.should >= 1
+    @user.monitored_at.should >= now
   end
 end
 

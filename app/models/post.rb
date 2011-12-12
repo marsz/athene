@@ -10,7 +10,8 @@ class Post < ActiveRecord::Base
   before_validation :sync_site_id_from_user
   
   def self.new_by_user(user, hash = {})
-    post = user.posts.build(hash)
+    post = self.new(hash)
+    post.user = user
     post.site = user.site
     post.site_post_id = user.crawler.parse_site_post_id_from_url(post.url) if post.url
     post

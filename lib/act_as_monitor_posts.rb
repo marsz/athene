@@ -16,12 +16,16 @@ module ActAsMonitorPosts
         tmps = crawler.fetch_posts_by_user(self, page)
         new_posts.concat tmps
       end while tmps.size > 0
-      monitored
-      new_posts
+      if self.monitored
+        new_posts
+      else
+        puts errors.full_messages.inspect
+        nil
+      end
     end
     
     def monitored
-      update_attributes(:monitored_at => Time.now)
+      self.update_attributes(:monitored_at => Time.now)
     end
     
   end
