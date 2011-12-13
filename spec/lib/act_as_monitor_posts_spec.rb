@@ -8,6 +8,17 @@ shared_examples_for "act_as_monitor_posts" do
     @user = Factory :user, @data[:user].merge(:site_id=>@site.id)
   end
 
+  it "scoped: posts_monitoring" do
+    @user.update_attributes :monitored_at => nil
+    klass = @user.class
+    last_user = Factory :user,:site_id=>@site.id,:site_user_id=>"1234",:monitored_at => Time.now-25.hours
+    monitored_user = Factory :user,:site_id=>@site.id,:site_user_id=>"4321",:monitored_at => Time.now-2.hours
+    users = klass.posts_monitoring
+    users.last.should == last_user
+    users.first.should == @user
+    users.include?(monitored_user).should be_false
+  end
+
   it "monitored" do
     now = Time.now
     @user.monitored

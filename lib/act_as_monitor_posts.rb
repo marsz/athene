@@ -5,6 +5,7 @@ module ActAsMonitorPosts
   module ClassMethods
     def act_as_monitor_posts
       delegate :crawler, :to => :site
+      scope :posts_monitoring, where("monitored_at < ? OR monitored_at is null", Time.now-24.hours).order("monitored_at ASC")
     end
   end
   
