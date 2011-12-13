@@ -23,3 +23,8 @@ posts_urls:
 user_posts:  
   url: "http://marsz.pixnet.net/blog/listall/1"
   size: 30
+users_should_enabled:
+  - "marsz"
+users_should_disabled:
+  - "marsz330marsz"
+  - "a033755191"

@@ -35,3 +35,7 @@ end
 every 1.day, :at => "am 07:00" do
   rake "report:daily"
 end
+
+every 1.month do
+  rake "cron:check_users_enabled"
+end

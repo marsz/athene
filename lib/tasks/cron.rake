@@ -1,5 +1,13 @@
 seed_sites = [:wretch,:pixnet]
 namespace :cron do
+  
+  task :check_users_enabled => :environment do
+    User.scoped.each do |user|
+      puts "check user(#{user.id}) enabled..."
+      user.check_is_enabled
+    end
+  end
+  
   namespace :builder do
     task :trigger => :environment do
       hook_key = "athene-#{Rails.env}"
@@ -24,7 +32,7 @@ namespace :cron do
   namespace :monitor_posts do
     seed_sites.each do |domain|
       task domain.to_sym => :environment do
-         Site.find_by_domain(domain.to_s).users.order("monitored_at ASC").each do |user|
+         Site.find_by_domain(domain.to_s).users.enabled.order("monitored_at ASC").each do |user|
            puts "monitoring user: #{user.id}...."
            user.monitor_posts
          end

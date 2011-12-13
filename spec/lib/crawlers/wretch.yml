@@ -20,3 +20,7 @@ posts_urls:
 user_posts:  
   url: "http://www.wretch.cc/blog/marsz&list=1"
   size: 100
+users_should_enabled:
+  - "marsz"
+users_should_disabled:
+  - "marsz330marsz"
