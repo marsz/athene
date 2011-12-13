@@ -29,12 +29,11 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :symlink_shared, :roles => [:app] do
-    symlink_hash = {
-      "#{shared_path}/config/database.yml" => "#{release_path}/config/database.yml",
-      "#{shared_path}/config/medusa.yml" => "#{release_path}/config/medusa.yml",
-      "#{shared_path}/config/builder.yml" => "#{release_path}/config/builder.yml",
-      "#{shared_path}/config/email.yml" => "#{release_path}/config/email.yml"
-    }
+    config_files = [:database,:medusa,:builder,:email,:airbrake]
+    symlink_hash = {}
+    config_files.each do |fname|
+      symlink_hash["#{shared_path}/config/#{fname}.yml"] ="#{shared_path}/config/#{fname}.yml"
+    end
     symlink_hash.each do |source, target|
       run "cp #{source} #{target}"
     end
