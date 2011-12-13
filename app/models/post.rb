@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   validates_uniqueness_of :site_post_id, :scope => [:site_id]
   validates_presence_of [:site_id,:site_post_id,:user_id,:url,:date]
-  validates_presence_of :title, :unless => Proc.new{|post|post.title.size > 0}
+  validates_presence_of :title, :unless => Proc.new{|post|post.title.to_s.size > 0}
   
   before_validation :sync_site_id_from_user
   
