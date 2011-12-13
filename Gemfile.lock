@@ -30,6 +30,9 @@ GEM
       activesupport (= 3.1.0)
     activesupport (3.1.0)
       multi_json (~> 1.0)
+    airbrake (3.0.8)
+      activesupport
+      builder
     ansi (1.4.1)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
@@ -157,6 +160,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   capistrano
   coffee-rails (~> 3.1.0)
   execjs
