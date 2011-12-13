@@ -7,7 +7,7 @@ module ActAsTagsStripable
       class << self; attr_reader :tag_strip_columns end
       @tag_strip_columns = options[:columns] || []
       
-      before_save :strip_tags_from_columns
+      before_validation :strip_tags_from_columns
     end
   end
   module InstanceMethods
