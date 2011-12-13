@@ -5,6 +5,9 @@ require 'capistrano/ext/multistage'
 require "whenever/capistrano"
 require 'bundler/capistrano'
 
+# require './config/boot'
+# require 'airbrake/capistrano'
+
 begin
   require 'capistrano_colors'
 rescue LoadError
