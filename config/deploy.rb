@@ -32,7 +32,7 @@ namespace :deploy do
     config_files = [:database,:medusa,:builder,:email,:airbrake]
     symlink_hash = {}
     config_files.each do |fname|
-      symlink_hash["#{shared_path}/config/#{fname}.yml"] ="#{shared_path}/config/#{fname}.yml"
+      symlink_hash["#{shared_path}/config/#{fname}.yml"] = "#{release_path}/config/#{fname}.yml"
     end
     symlink_hash.each do |source, target|
       run "cp #{source} #{target}"
