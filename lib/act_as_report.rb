@@ -17,7 +17,8 @@ module ActAsReport
                      :total_new_users => site.users.where("DATE(created_at) = ?", date).count,
                      :total_new_posts => site.posts.where(:date=>date).count,
                      :total_users => site.users.count,
-                     :total_posts => site.posts.count
+                     :total_posts => site.posts.count,
+                     :monitored_users => site.users.where("DATE(monitored_at) = ?",date).count
                     }
                   }
       }
