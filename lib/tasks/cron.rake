@@ -34,7 +34,8 @@ namespace :cron do
       task domain.to_sym => :environment do
          Site.find_by_domain(domain.to_s).users.enabled.posts_monitoring.each do |user|
            puts "monitoring user: #{user.id}...."
-           user.monitor_posts
+           # user.monitor_posts
+           user.async_monitor_posts
          end
       end
     end

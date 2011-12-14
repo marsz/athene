@@ -39,13 +39,14 @@ group :test,:development do
   gem "factory_girl_rails"
 end
 
+group :test do
+  gem "resque_spec"
+end
+
 gem 'capistrano'
 gem 'rest-client'
 gem 'whenever', :require => false
 gem "haml"
 gem "airbrake"
 gem "resque"
-
-group :test do
-  gem "resque_spec"
-end
+gem "state_machine"

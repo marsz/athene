@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213120829) do
+ActiveRecord::Schema.define(:version => 20111214142325) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(:version => 20111213120829) do
     t.text     "url"
     t.datetime "monitored_at"
     t.integer  "posts_count"
+    t.string   "posts_monitoring_state"
     t.boolean  "is_enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "users", ["posts_monitoring_state"], :name => "index_users_on_posts_monitoring_state"
   add_index "users", ["site_id", "site_user_id"], :name => "index_users_on_site_id_and_site_user_id", :unique => true
   add_index "users", ["site_id"], :name => "index_users_on_site_id"
 
