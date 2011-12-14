@@ -36,6 +36,13 @@ shared_examples_for "act_as_monitor_posts" do
     new_posts.size.should >= 1
     @user.monitored_at.should >= now
   end
+  
+  it "monitor posts bad user" do
+    bad_user = Factory :user,:site_id=>@site.id,:site_user_id=>"marsz1234",:monitored_at => nil
+    bad_user.monitor_posts.size.should == 0
+    bad_user.monitored_at.should == nil
+  end
+  
 end
 
 describe "crawlers" do
