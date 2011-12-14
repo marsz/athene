@@ -9,3 +9,4 @@ config/medusa.yml
 config/builder.yml
 config/email.yml
 config/airbrake.yml
+config/resque.yml
