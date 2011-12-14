@@ -1,4 +1,6 @@
 Athene::Application.routes.draw do
+  
+  match "reports" => "reports#index", :via => :get
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

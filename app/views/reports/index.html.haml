@@ -1,0 +1,20 @@
+%ul
+  %h1= @date
+  %li
+    = "users: #{@report[:new_users]} / #{@report[:total_users]}"
+  %li
+    = "posts: #{@report[:new_posts]} / #{@report[:total_posts]}"
+- @report[:sites].each do |site|
+  %hr
+  %ul
+    = site[:name]
+    %li
+      = "users ( new/total ): "
+      = site[:total_new_users]
+      = "/"
+      = site[:total_users]
+    %li
+      = "posts ( new/total ):"
+      = site[:total_new_posts]
+      = "/"
+      = site[:total_posts]

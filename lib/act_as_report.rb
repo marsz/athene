@@ -15,7 +15,9 @@ module ActAsReport
                     site = crawler_klass.new.seed_site
                     {:name => site.name, 
                      :total_new_users => site.users.where("DATE(created_at) = ?", date).count,
-                     :total_new_posts => site.posts.where(:date=>date).count
+                     :total_new_posts => site.posts.where(:date=>date).count,
+                     :total_users => site.users.count,
+                     :total_posts => site.posts.count
                     }
                   }
       }
