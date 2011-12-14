@@ -25,6 +25,37 @@ shared_examples_for "act_as_monitor_posts" do
     @user.monitored_at.should >= now
   end
   
+  describe "state mechine testing" do
+    before do
+      @user.reset_posts_monitoring_state
+      ResqueSpec.reset!
+    end
+    
+    it "async_monitor_posts only once" do
+      @user.async_monitor_posts
+      @user.posts_monitor_idle?.should be_false
+      @user.posts_monitor_queuing?.should be_true
+      @user.async_monitor_posts
+      ActAsMonitorPosts::Worker.should have_queue_size_of(1)
+    end
+    
+    it "after perform state should be idle" do
+      @user.async_monitor_posts
+      @user.posts_monitor_queuing?.should be_true
+      ActAsMonitorPosts::Worker.perform(@user.id)
+      @user.reload
+      @user.posts_monitor_idle?.should be_true
+    end
+    
+  end
+  
+  it "#async_monitor_posts" do
+    ResqueSpec.reset!
+    @user.async_monitor_posts
+    ActAsMonitorPosts::Worker.should have_queued(@user.id).in(:monitor_posts)
+    ActAsMonitorPosts::Worker.should have_queue_size_of(1)
+  end
+  
   it "monitor posts" do
     now = Time.now
     posts = @user.monitor_posts
