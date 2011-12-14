@@ -57,6 +57,13 @@ shared_examples_for "act_as_crawler" do
       @user_posts_url = @data[:user_posts][:url]
       @user_posts_size = @data[:user_posts][:size]
     end
+    
+    it "fetch_posts_by_user" do
+      @crawler.fetch_posts_by_user(@user, 1).first.id.should_not == @crawler.fetch_posts_by_user(@user, 2).first.id
+      bad_user = Factory :user, :site_id => @site.id, :site_user_id => "mmaarrsszz333300"
+      @crawler.fetch_posts_by_user(bad_user).should == nil
+    end
+    
     it "parse_posts_page_size" do
       @posts_urls.each do |hash|
         content = Net::HTTP.get(URI.parse(hash[:url]))

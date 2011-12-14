@@ -52,6 +52,7 @@ module ActAsCrawler
     def fetch_posts_by_user user, page = 0
       new_posts = []
       content = fetch(url_posts(user, page))
+      return nil if content.blank?
       parse_posts_from_posts_page(content).each do |post_hash|
         post = Post.new_by_user(user, post_hash)
         if post.save

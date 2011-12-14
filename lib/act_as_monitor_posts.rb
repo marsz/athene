@@ -15,14 +15,12 @@ module ActAsMonitorPosts
       page = 1
       begin
         tmps = crawler.fetch_posts_by_user(self, page)
-        new_posts.concat tmps
-      end while tmps.size > 0
-      if self.monitored
-        new_posts
-      else
-        puts errors.full_messages.inspect
-        nil
-      end
+        if tmps
+          new_posts.concat tmps
+          self.monitored
+        end
+      end while tmps && tmps.size > 0
+      new_posts
     end
     
     def monitored
