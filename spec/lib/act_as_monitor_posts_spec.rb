@@ -25,6 +25,14 @@ shared_examples_for "act_as_monitor_posts" do
     @user.monitored_at.should >= now
   end
   
+  it "#async_monitor_posts" do
+    ResqueSpec.reset!
+    @user.async_monitor_posts
+    @user.class.should have_queued(@user.id, :method=> "monitor_posts" ).in(:monitor_posts)
+    @user.class.queue = "monitor_posts"
+    @user.class.should have_queue_size_of(1)
+  end
+  
   it "monitor posts" do
     now = Time.now
     posts = @user.monitor_posts
