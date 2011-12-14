@@ -25,7 +25,7 @@ module ActAsFetcher
       begin
         ActiveSupport::JSON.decode(RestClient.method(method).call(request_url, params))
       rescue => e
-        Airbrake.notify(e, :params => {:request_url => request_url, :url => url, :options => options})
+        Airbrake.notify(e, :parameters => {:request_url => request_url, :url => url, :options => options})
         ""
       end
     end
