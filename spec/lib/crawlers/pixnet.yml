@@ -9,6 +9,7 @@ users_urls:
   - "http://www.pixnet.net/blog/article/4/3/hot/2"
 user:
   site_user_id: "marsz"
+user_posts_over_limit: 40
 post_urls:
   - "http://marsz.pixnet.net/blog/post/28379032"
   - "http://marsz.pixnet.net/blog/post/28379032#comments"

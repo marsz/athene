@@ -59,9 +59,10 @@ shared_examples_for "act_as_monitor_posts" do
   it "monitor posts" do
     now = Time.now
     posts = @user.monitor_posts
-    posts.size.should > 0
+    limit = @data[:user_posts_over_limit] || 0
+    posts.size.should > limit
     posts.each { |post| post.new_record?.should == false}
-    posts.last.destroy
+    posts.first.destroy
     new_posts = @user.monitor_posts
     new_posts.size.should_not == posts.size
     new_posts.size.should >= 1

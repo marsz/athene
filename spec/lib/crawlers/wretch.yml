@@ -6,6 +6,7 @@ users_urls:
   - "http://www.wretch.cc/blog/?tab=cat&class_id=25"
 user:
   site_user_id: "bajenny"
+user_posts_over_limit: 500
 post_urls:
   - "http://www.wretch.cc/blog/bajenny/16520595"
   - "http://www.wretch.cc/blog/marsz/22047741#postComments"

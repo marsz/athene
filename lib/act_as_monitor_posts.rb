@@ -67,6 +67,7 @@ module ActAsMonitorPosts
           new_posts.concat tmps
           self.monitored
         end
+        page += 1
       end while tmps && tmps.size > 0
       new_posts
     end
