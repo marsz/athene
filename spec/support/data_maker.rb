@@ -11,4 +11,28 @@ module DataMaker
     ActiveSupport::HashWithIndifferentAccess.new(YAML.load_file("#{Rails.root}/spec/lib/crawlers/#{domain}.yml"))
   end
   
+  def self.init_fetcher
+    ActAsFetcher::InstanceMethods.module_eval do
+      def fetch url, options = {}
+        if !$fetch
+          $fetch = {}
+        end
+        if !$fetch[url]
+          $fetch[url] = fetch_through_medusa(url,options)["data"].to_s
+        end
+        $fetch[url]
+      end
+      
+      def fetch_status url, options = {}
+        if !$fetch_status
+          $fetch_status = {}
+        end
+        if !$fetch_status[url]
+          $fetch_status[url] = fetch_through_medusa(url,options)["status"]
+        end
+        $fetch_status[url]
+      end
+    end
+  end
+  
 end
