@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :site do
     name "marsz"
-    domain "wretch"
+    sequence(:domain) { |n| "wretch#{n}" }
     url "http://www.marsz.tw"
     factory :site_another do
       domain "pixnet"
@@ -9,7 +9,10 @@ FactoryGirl.define do
   end
 
   factory :user do
-    site_user_id "marsz"
+    site do
+      Factory :site
+    end
+    sequence(:site_user_id) { |n| "marsz#{n}" }
     name "MarsZ Chen"
     url "http://blog.marsz.tw"
     is_enabled true
@@ -24,6 +27,9 @@ FactoryGirl.define do
   end
 
   factory :post do
+    user do
+      Factory(:user)
+    end
     site_post_id "12345678"
     title "hahahah"
     date Time.now.to_date

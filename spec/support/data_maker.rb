@@ -1,6 +1,6 @@
 module DataMaker
   def init_all_data
-    @site = Factory(:site)
+    @site = Factory(:site, :domain => "wretch")
     @user = Factory(:user, :site_id => @site.id)
     @post = Factory(:post, :user_id => @user.id)
     @users_monitor_parser = Factory(:users_monitor_parser, :site_id => @site.id)

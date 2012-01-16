@@ -30,6 +30,8 @@ describe "all included class" do
   
   describe User do
     before do
+      @site = Site.find_by_domain("wretch") || Factory(:site, :domain => "wretch")
+      @user = Factory :user, :site => @site, :site_user_id => "marsz"
       @user_should_disable = Factory :user_should_disabled, :site_id => @site.id
       @user_should_enable = @user
     end
