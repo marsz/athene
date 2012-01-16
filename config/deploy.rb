@@ -28,6 +28,9 @@ set :use_sudo, false
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
   task :symlink_shared, :roles => [:app] do
     config_files = [:database,:medusa,:builder,:email,:airbrake,:resque]
     symlink_hash = {}
