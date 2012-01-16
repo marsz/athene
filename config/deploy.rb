@@ -38,7 +38,7 @@ namespace :deploy do
       symlink_hash["#{shared_path}/config/#{fname}.yml"] = "#{release_path}/config/#{fname}.yml"
     end
     symlink_hash.each do |source, target|
-      run "cp #{source} #{target}"
+      run "ln -s #{source} #{target}"
     end
   end
 end
@@ -51,8 +51,5 @@ task :tail_log, :roles => :app do
   run "tail -f #{shared_path}/log/#{rails_env}.log"
 end
 
-before "deploy:assets:precompile", "deploy:symlink_shared"
-before "deploy:migrate", "deploy:symlink_shared"
+before "deploy:assets:symlink", "deploy:symlink_shared"
 after "deploy", "deploy:cleanup"
-after "deploy", "deploy:symlink_shared"
-after "deploy:migrations", "deploy:cleanup"
