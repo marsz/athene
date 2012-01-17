@@ -26,4 +26,4 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 end
 
-DataMaker.init_fetcher
+# DataMaker.init_fetcher
