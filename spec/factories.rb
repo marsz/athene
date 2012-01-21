@@ -30,7 +30,7 @@ FactoryGirl.define do
     user do
       Factory(:user)
     end
-    site_post_id "12345678"
+    sequence(:site_post_id) {|n| "123#{n}"}
     title "hahahah"
     date Time.now.to_date
     url "http://blog.marsz.tw/12345678"

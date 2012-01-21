@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include Search::Users
+  searchable
+
   include ActAsIsEnabled
   act_as_is_enabled
   
