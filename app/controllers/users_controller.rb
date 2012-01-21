@@ -34,9 +34,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     respond_to do |f|
-      f.html { render :text => api_respond(@user).to_json }
-      f.json { render :json => api_respond(@user).to_json }
-      f.xml { render :xml => api_respond(@user).to_xml }
+      f.html { render :text => {:user => api_respond(@user)}.to_json }
+      f.json { render :json => {:user => api_respond(@user)}.to_json }
+      f.xml { render :xml => {:user => api_respond(@user)}.to_xml }
     end
   end
   
