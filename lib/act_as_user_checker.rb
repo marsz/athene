@@ -6,6 +6,7 @@ module ActAsUserChecker
       if !self.method_defined?(:crawler)
         delegate :crawler, :to => :site
       end
+      scope :enabled_checking, where('checked_at < ? OR checked_at is null', Time.now-3.days)
     end
   end
   
@@ -16,6 +17,7 @@ module ActAsUserChecker
       else
         self.disable
       end
+      self.update_attributes(:checked_at => Time.now)
     end
   end
 end

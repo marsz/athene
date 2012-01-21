@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
-  paginates_per 50
   
+  include Search::Posts
+  searchable
+
   include ActAsTagsStripable
   act_as_tags_stripable :columns => [:title]
   
