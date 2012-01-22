@@ -11,8 +11,14 @@ shared_examples_for "act_as_having_crawler" do
       Site.find_by_url(url).id.should == @site.id
     end
   end
-  it "crawler" do
-    @site.crawler.class.should == @crawler.class
+  describe "#crawler" do
+    it "should work" do
+      @site.crawler.class.should == @crawler.class
+    end
+    it "should return nil if class not exists" do
+      @site.domain = "abc"
+      @site.crawler.should be_nil
+    end
   end
 end
 

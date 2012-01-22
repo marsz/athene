@@ -7,14 +7,18 @@ module ActAsHavingCrawler
   module ClassMethods
     def find_by_url(url)
       Site.all.each do |site|
-        return site if site.crawler.parse_site_user_id_from_url(url)
+        return site if site.crawler && site.crawler.parse_site_user_id_from_url(url)
       end
       nil
     end
   end
   module InstanceMethods
     def crawler
-      "Crawlers::#{self.domain.camelize}".constantize.new(self)
+      begin
+        "Crawlers::#{self.domain.camelize}".constantize.new(self)
+      rescue NameError
+        nil
+      end
     end
   end
 end
