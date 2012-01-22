@@ -21,6 +21,13 @@ describe UsersController do
       hash.key?("user").should be_true
       hash["user"]["id"].should == user.id
     end
+    it "should not be created with upper case exists data" do
+      user = Factory :user, :site_user_id => "MARSZ", :site => @site
+      post :create, :site => @site.domain, :user => user.site_user_id
+      hash = ActiveSupport::JSON.decode(response.body)
+      hash.key?("user").should be_true
+      hash["user"]["id"].should == user.id
+    end
     it "should not be created with non-exists site" do
       post :create, :site => :foo, :user => :bar
       ActiveSupport::JSON.decode(response.body).should be_a_kind_of(Hash)
