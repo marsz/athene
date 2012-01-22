@@ -14,6 +14,17 @@ describe User do
   it {should validate_format_of(:site_user_id).not_with("marsz\n") }
   it {should validate_format_of(:site_user_id).not_with("marsz<b>sss") }
   
+  describe "uniqueness of site_user_id without case sensitive" do
+    before do
+      @site = Factory :site
+      @user = Factory :user, :site_user_id => "ABC", :site => @site
+    end
+    it "should not be saved" do
+      user = Factory :user, :site_user_id => "aa", :site => @site
+      user.site_user_id = "abc"
+      user.save.should be_false
+    end
+  end
   describe "new_by_url" do
     before do
       @url = "http://www.wretch.cc/blog/venus"
