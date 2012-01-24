@@ -18,10 +18,10 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 2.hours do
-  rake "cron:monitor_users:wretch"
-  rake "cron:monitor_users:pixnet"
-end
+# every 2.hours do
+#   rake "cron:monitor_users:wretch"
+#   rake "cron:monitor_users:pixnet"
+# end
 
 every 12.hours do
   rake "cron:monitor_posts:wretch"
