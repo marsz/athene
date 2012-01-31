@@ -7,7 +7,7 @@ describe Post do
   end
   it {should belong_to(:site)}
   it {should belong_to(:user)}
-  it {should validate_uniqueness_of(:site_post_id).scoped_to([:site_id])}
+  it {should validate_uniqueness_of(:site_post_id).scoped_to([:user_id])}
   it {should validate_presence_of(:site_id)}
   it {should validate_presence_of(:site_post_id)}
   it {should validate_presence_of(:user_id)}

@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   
   belongs_to :site, :counter_cache => true
   belongs_to :user, :counter_cache => true
-  validates_uniqueness_of :site_post_id, :scope => [:site_id]
+  validates_uniqueness_of :site_post_id, :scope => [:user_id]
   validates_presence_of [:site_id,:site_post_id,:user_id,:url,:date]
   validates_presence_of :title, :unless => Proc.new{|post|post.title.to_s.size > 0}
   

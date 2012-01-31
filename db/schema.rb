@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121082219) do
+ActiveRecord::Schema.define(:version => 20120131093245) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20120121082219) do
   end
 
   add_index "posts", ["date"], :name => "index_posts_on_date"
-  add_index "posts", ["site_id", "site_post_id"], :name => "index_posts_on_site_id_and_site_post_id", :unique => true
   add_index "posts", ["site_id"], :name => "index_posts_on_site_id"
+  add_index "posts", ["site_post_id", "user_id"], :name => "index_posts_on_site_post_id_and_user_id", :unique => true
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "sites", :force => true do |t|
