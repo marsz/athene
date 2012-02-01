@@ -48,6 +48,6 @@ gem 'rest-client'
 gem 'whenever', :require => false
 gem "haml"
 gem "airbrake"
-gem "resque"
+gem "resque", :git => 'git://github.com/defunkt/resque.git'
 gem "state_machine"
 gem "kaminari"
