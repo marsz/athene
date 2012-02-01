@@ -41,6 +41,11 @@ namespace :deploy do
       run "ln -s #{source} #{target}"
     end
   end
+  task :restart_resque, :roles => :app, :except => { :no_release => true } do        
+    pid_file = "#{current_path}/tmp/pids/resque.pid"    
+    run "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
+    run "cd #{current_path} && PIDFILE=#{pid_file} RAILS_ENV=#{rails_env} BACKGROUND=yes QUEUE=* bundle exec rake environment resque:work"
+  end
 end
 
 task :seed_data, :roles => :app do
@@ -53,3 +58,4 @@ end
 
 before "deploy:assets:symlink", "deploy:symlink_shared"
 after "deploy", "deploy:cleanup"
+after 'deploy:restart', 'deploy:restart_resque'
