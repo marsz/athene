@@ -4,7 +4,7 @@ namespace :cron do
   task :check_users_enabled => :environment do
     User.enabled_checking.each do |user|
       puts "check user(#{user.id}) enabled..."
-      user.check_is_enabled
+      user.async_check_is_enabled
     end
   end
   

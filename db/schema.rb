@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131093245) do
+ActiveRecord::Schema.define(:version => 20120204094635) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20120131093245) do
     t.text     "url"
     t.datetime "monitored_at"
     t.datetime "checked_at"
+    t.string   "check_state",            :default => "idle"
     t.integer  "posts_count"
     t.string   "posts_monitoring_state"
     t.boolean  "is_enabled"

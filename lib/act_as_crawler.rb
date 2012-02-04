@@ -75,7 +75,11 @@ module ActAsCrawler
     end
     
     def check_user_is_enabled(user)
-      self.fetch_status(url_posts(user)) == 200
+      res = self.fetch_status(url_posts(user)) == 200
+      if Rails.env != "test" && !res # double check
+        res = self.fetch_status(url_posts(user)) == 200 
+      end
+      res
     end
     
     def url_posts user, page = 0
