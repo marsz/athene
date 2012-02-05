@@ -11,6 +11,8 @@ module ActAsReport
         :new_users => User.where(:created_at => date_range).count,
         :new_posts => Post.where(:date => date).count,
         :total_users => User.scoped.count,
+        :disabled_users => User.disabled.count,
+        :enabled_users => User.enabled.count,
         :total_posts => Post.scoped.count,
         :sites => Site::CRAWLERS.map{|crawler_klass|
                     site = crawler_klass.new.seed_site

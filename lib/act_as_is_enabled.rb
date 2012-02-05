@@ -4,6 +4,7 @@ module ActAsIsEnabled
   module ClassMethods
     def act_as_is_enabled
       scope :enabled, where(:is_enabled => true)
+      scope :disabled, where("is_enabled is null OR is_enabled = 0")
     end
   end
   
@@ -11,6 +12,10 @@ module ActAsIsEnabled
     
     def enabled?
       is_enabled
+    end
+    
+    def disabled?
+      !is_enabled
     end
     
     def enable
