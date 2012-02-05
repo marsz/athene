@@ -3,6 +3,8 @@
   %li
     = "users: #{@report[:new_users]} / #{@report[:total_users]}"
   %li
+    = "enable / disable users : #{@report[:enabled_users]} / #{@report[:disabled_users]}"
+  %li
     = "posts: #{@report[:new_posts]} / #{@report[:total_posts]}"
 - @report[:sites].each do |site|
   %hr

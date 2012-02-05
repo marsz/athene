@@ -1,19 +1,9 @@
 require "spec_helper"
 
 describe ReportMailer do
-  pending "ReportMailer"
-  # describe "daily" do
-  #   let(:mail) { ReportMailer.daily }
-  # 
-  #   it "renders the headers" do
-  #     mail.subject.should eq("Daily")
-  #     mail.to.should eq(["to@example.org"])
-  #     mail.from.should eq(["from@example.com"])
-  #   end
-  # 
-  #   it "renders the body" do
-  #     mail.body.encoded.should match("Hi")
-  #   end
-  # end
-
+  it "#daily" do
+    mail = ReportMailer.daily.deliver!
+    mail.body.should match((Time.now.to_date-1.day).to_s)
+    mail.subject.length.should > 0
+  end
 end

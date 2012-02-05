@@ -13,6 +13,11 @@ shared_examples_for "act_as_is_enabled" do
       @obj_last.enable
       @klass.enabled.last.should == @obj_last
     end
+    it "disabled" do
+      @klass.disabled.first.should == @obj_last
+      @obj.disable
+      @klass.disabled.first.should == @obj
+    end
   end
   
   describe "instances" do
@@ -23,9 +28,9 @@ shared_examples_for "act_as_is_enabled" do
     end
     
     it "disable" do
-      @obj.enabled?.should be_true
+      @obj.disabled?.should be_false
       @obj.disable.should be_true
-      @obj.enabled?.should be_false
+      @obj.disabled?.should be_true
     end
   end
 end
