@@ -25,7 +25,7 @@ shared_examples_for "act_as_user_checker" do
       @un_check_users = [
         Factory(:user_for_check, :check_state => "queuing"),
         Factory(:user_for_check, :check_state => "checking"),
-        Factory(:user_for_check, :checked_at => Time.now-1.day),
+        Factory(:user_for_check, :checked_at => Time.now-(User::CHECK_WITHIN_DAYS-1).day),
       ]
     end
     it "should include and not included users" do

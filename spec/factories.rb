@@ -19,7 +19,7 @@ FactoryGirl.define do
     check_state "idle"
     factory :user_for_check do
       check_state "idle"
-      checked_at Time.now-10.days
+      checked_at Time.now-(User::CHECK_WITHIN_DAYS+10).days
     end
     factory :user_disabled do
       site_user_id "user-disabled"

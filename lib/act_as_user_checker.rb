@@ -1,5 +1,6 @@
 module ActAsUserChecker
   extend ActiveSupport::Concern
+  CHECK_WITHIN_DAYS = 7
   
   module Worker
     @queue = "check_users"
@@ -18,7 +19,13 @@ module ActAsUserChecker
       if !self.method_defined?(:crawler)
         delegate :crawler, :to => :site
       end
-      scope :enabled_checking, where(:check_state => "idle").where('checked_at < ? OR checked_at is null', Time.now-3.days)
+      
+      if Rails.env != "test"
+        after_create :async_check_is_enabled
+      end
+      
+      scope :enabled_checking, where(:check_state => "idle").where('checked_at < ? OR checked_at is null', Time.now-CHECK_WITHIN_DAYS.days)
+      
       init_check_state
     end
     
