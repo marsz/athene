@@ -42,9 +42,12 @@ namespace :deploy do
     end
   end
   task :restart_resque, :roles => :app, :except => { :no_release => true } do        
-    pid_file = "#{current_path}/tmp/pids/resque.pid"    
-    run "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
-    run "cd #{current_path} && PIDFILE=#{pid_file} RAILS_ENV=#{rails_env} BACKGROUND=yes QUEUE=* bundle exec rake environment resque:work"
+    queues = [:check_users, :monitor_posts]
+    queues.each do |q|
+      pid_file = "#{current_path}/tmp/pids/resque-#{q}.pid"    
+      run "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
+      run "cd #{current_path} && PIDFILE=#{pid_file} RAILS_ENV=#{rails_env} BACKGROUND=yes QUEUE=#{q} bundle exec rake environment resque:work"
+    end
   end
 end
 
