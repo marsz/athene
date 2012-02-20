@@ -30,4 +30,5 @@ describe Search::Users do
       end
     end
   end
+  pending "avatar"
 end

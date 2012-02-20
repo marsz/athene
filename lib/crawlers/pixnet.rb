@@ -54,6 +54,18 @@ class Crawlers::Pixnet
     end
     urls
   end
+
+  def url_user user
+    "http://#{user.site_user_id}.pixne.net/blog"
+  end
+  def parse_user_avatar_url content, user
+    "http://s1.pimg.tw/avatar/#{user.site_user_id}/0/0/zoomcrop/300x300.jpg"
+    # tmps = content.scan /<a class="user\-img" .*?<img src="([^\?"]+)/m
+    # if tmps.size > 0
+    #   url = tmps[0][0].gsub("90x90.","300x300.")
+    # end
+    # url || nil
+  end
     
   protected
   
@@ -61,6 +73,9 @@ class Crawlers::Pixnet
     {:label => "pixnet-user_monitor",
      :regex => '/<li class="grid\-author"><a href="([^"]+)" target="_blank">(.+?)<\/a>/m'
     }
+  end
+  def download_options
+    { :referer => "www.pixnet.net" }
   end
 
 end

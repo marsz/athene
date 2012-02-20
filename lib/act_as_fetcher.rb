@@ -2,6 +2,10 @@ module ActAsFetcher
   extend ActiveSupport::Concern
   module InstanceMethods
     
+    def download url, options = {}
+      download_through_medusa(url, options)
+    end
+    
     def fetch url, options = {}
       fetch_through_medusa(url,options)["data"].to_s
     end
@@ -12,10 +16,12 @@ module ActAsFetcher
     
     private
     
+    def medusa_token
+      YAML.load_file("#{Rails.root}/config/medusa.yml")[Rails.env]["token"]
+    end
     def fetch_through_medusa url, options = {}
       method = options[:method] || "get"
-      token = YAML.load_file("#{Rails.root}/config/medusa.yml")[Rails.env]["token"]
-      params = {:url => url,:token=>token}
+      params = {:url => url,:token => medusa_token}
       request_url = "http://medusa.marsz.tw/crawler/fetch.json"
       params[:query] = options[:querys] if options[:querys]
       if method == 'get'
@@ -31,5 +37,11 @@ module ActAsFetcher
       end
     end
     
+    def download_through_medusa url, options = {}
+      params = { :url => url, :token => medusa_token }
+      params[:referer] = options[:referer] if options[:referer]
+      request_url = "http://medusa.marsz.tw/crawler/download.json"
+      ActiveSupport::HashWithIndifferentAccess.new(ActiveSupport::JSON.decode(RestClient.post(request_url, params)))
+    end
   end
 end
