@@ -1,0 +1,12 @@
+development:
+  :aws:
+    :bucket: ""
+    :access_key_id: ""
+    :secret_access_key: ""
+    :host: ""
+production:
+  :aws:
+    :bucket: ""
+    :access_key_id: ""
+    :secret_access_key: ""
+    :host: ""    

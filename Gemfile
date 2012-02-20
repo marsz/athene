@@ -51,3 +51,6 @@ gem "airbrake"
 gem "resque", :git => 'git://github.com/defunkt/resque.git'
 gem "state_machine"
 gem "kaminari"
+gem "carrierwave"
+gem 'mini_magick'
+gem "fog"

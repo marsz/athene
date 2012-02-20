@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204094635) do
+ActiveRecord::Schema.define(:version => 20120219071646) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120204094635) do
     t.integer  "site_id"
     t.string   "name"
     t.text     "url"
+    t.string   "avatar"
     t.datetime "monitored_at"
     t.datetime "checked_at"
     t.string   "check_state",            :default => "idle"

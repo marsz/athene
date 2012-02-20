@@ -48,11 +48,24 @@ class Crawlers::Wretch
     urls
   end
   
-  protected
+  def url_user user
+    "http://www.wretch.cc/blog/#{user.site_user_id}"
+  end
+  def parse_user_avatar_url content, user
+    tmps = content.scan /<div class="boxMySpaceImg">.*?src="([^\?"]+)/m
+    if tmps.size > 0
+      url = tmps[0][0].gsub("_90.","_150.")
+    end
+    url || nil
+  end
   
+  protected
   def users_monitor_parser_hash
     {:label => "wretch-user_monitor",
      :regex => '/<h2><a .*? href="[^\*]+?\*([^"]+)">.*?<\/a>.*?<h4><a [^<]+?>(.*?)<\/a><em>/m'
     }
+  end
+  def download_options
+    { :referer => "www.wretch.cc" }
   end
 end

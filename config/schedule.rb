@@ -39,3 +39,7 @@ end
 every 1.month do
   rake "cron:check_users_enabled"
 end
+
+every 1.hour do
+  rake "cron:download_users_avatar"
+end

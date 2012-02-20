@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ReportsController do
-  integrate_views
   describe "routes" do
     it { should route(:get, "/reports").to(:action => :index) }
   end

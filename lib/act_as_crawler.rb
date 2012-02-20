@@ -82,7 +82,23 @@ module ActAsCrawler
       res
     end
     
+    def download_user_avatar(user)
+      content = fetch(url_user(user))
+      avatar_url = parse_user_avatar_url(content, user)
+      if avatar_url
+        data = download(avatar_url, download_options)
+        if [304,200].include?data[:status]
+          user.remote_avatar_url = data[:url]
+          user.save
+        end
+      end
+    end
+    
     def url_posts user, page = 0
+      raise "not implement"
+    end
+    
+    def url_user user
       raise "not implement"
     end
     
@@ -101,10 +117,17 @@ module ActAsCrawler
     def seed_users_monitor_urls(parser)
       raise "not implement"
     end
-        
+    
+    def parse_user_avatar_url content, user
+      raise "not implement"
+    end
+    
     protected
     
     def users_monitor_parser_hash
+      raise "not implement"
+    end
+    def download_options
       raise "not implement"
     end
   end
