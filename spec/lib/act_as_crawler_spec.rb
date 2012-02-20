@@ -113,6 +113,9 @@ shared_examples_for "act_as_crawler" do
     end
   end
   
+  pending "#parse_user_avatar"
+  pending "#url_user"
+  
 end
 
 describe "crawlers" do

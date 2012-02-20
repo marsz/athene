@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   include ActAsUserChecker
   act_as_user_checker
   
+  include ActAsUserAvatar
+  act_as_user_avatar
+  
   belongs_to :site, :counter_cache => true
   validates_uniqueness_of :site_user_id, :scope => [:site_id], :case_sensitive => false
   validates_presence_of :site_id

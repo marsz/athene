@@ -40,4 +40,11 @@ namespace :cron do
       end
     end
   end
+  task :download_users_avatar => :environment do
+    User.enabled.no_avatar.limit(100).each do |user|
+      puts user.id.to_s
+      user.download_avatar
+      puts user.avatar
+    end
+  end
 end
