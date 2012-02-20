@@ -10,3 +10,4 @@ config/builder.yml
 config/email.yml
 config/airbrake.yml
 config/resque.yml
+config/fog.yml
