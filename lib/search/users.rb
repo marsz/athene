@@ -23,7 +23,16 @@ module Search::Users
 
   module InstanceMethods
     def to_api_hash
-      { :id => id, :site_user_id => site_user_id, :posts_count => posts_count || 0 }
+      hash = { :id => id, :site_user_id => site_user_id, :posts_count => posts_count || 0}
+      if avatar.url
+        hash[:avatar] = {
+          :origin => avatar.url,
+          :thumb => avatar.thumb.url,
+          :medium_pad => avatar.medium_pad.url,
+          :medium => avatar.medium.url
+        }        
+      end
+      hash
     end
   end
 end
