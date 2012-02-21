@@ -2,6 +2,7 @@ require 'spec_helper'
 
 shared_examples_for "act_as_crawler" do
   include DataMaker
+  include ActAsFetcher
   before do
     @site = @crawler.seed_site
     @users_monitor_parser = @crawler.seed_users_monitor_parser(@site)
@@ -66,12 +67,12 @@ shared_examples_for "act_as_crawler" do
     
     it "parse_posts_page_size" do
       @posts_urls.each do |hash|
-        content = Net::HTTP.get(URI.parse(hash[:url]))
+        content = fetch(hash[:url])
         @crawler.parse_posts_page_size(content).should >= hash[:size]
       end
     end
     it "url_posts" do
-      content = Net::HTTP.get(URI.parse(@crawler.url_posts(@user)))
+      content = fetch(@crawler.url_posts(@user))
       content.is_a?(String).should == true
       content.size.should > 0
     end
@@ -83,7 +84,7 @@ shared_examples_for "act_as_crawler" do
       end
     end
     it "parse_posts_from_posts_page" do
-      content = Net::HTTP.get(URI.parse(@user_posts_url))
+      content = fetch(@user_posts_url)
       posts = @crawler.parse_posts_from_posts_page(content)
       posts.size.should >= @user_posts_size
       posts.each do |post|
@@ -113,9 +114,19 @@ shared_examples_for "act_as_crawler" do
     end
   end
   
-  pending "#parse_user_avatar"
-  pending "#url_user"
+  it "#url_user" do
+    user = Factory :user, :site => @site
+    url = @crawler.url_user(user)
+    url.should be_a_kind_of(String)
+    url.length.should > 0
+  end
   
+  it "#parse_user_avatar_url" do
+    user = Factory :user, :site => @site, :site_user_id => @data[:user][:site_user_id]
+    url = @crawler.url_user user
+    content = fetch(url)
+    @crawler.parse_user_avatar_url(content, user).should_not be_nil
+  end
 end
 
 describe "crawlers" do
