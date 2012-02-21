@@ -1,5 +1,6 @@
 Athene::Application.routes.draw do
   
+  mount Resque::Server.new, :at => "/admin/resque"
   match "reports" => "reports#index", :via => :get
   resources :posts
   resources :users
