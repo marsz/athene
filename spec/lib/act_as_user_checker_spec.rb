@@ -19,6 +19,8 @@ shared_examples_for "act_as_user_checker" do
     end
   end
   
+  pending "scope enabled_checking_by_avatar"
+  
   describe "scope enabled_checking" do
     before do 
       @check_users = [Factory(:user_for_check, :checked_at => nil), Factory(:user_for_check)]
