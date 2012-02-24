@@ -36,10 +36,11 @@ every 1.day, :at => "am 07:00" do
   rake "report:daily"
 end
 
-every 1.month do
+every 1.week do
   rake "cron:check_users_enabled"
 end
 
 every 1.hour do
   rake "cron:download_users_avatar"
+  rake "cron:check_users_enabled_by_avatar"
 end
