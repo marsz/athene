@@ -2,7 +2,7 @@ class Site < ActiveRecord::Base
   include ActAsFetcher
   include ActAsHavingCrawler
   include Search::Sites
-  searchable
+  acts_as_searchable
   
   validates_format_of :domain, :with => /\A[a-z\-\.0-9]+\z/
   validates_uniqueness_of :domain

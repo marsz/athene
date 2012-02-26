@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   def index
-    @users = User.search(params)
+    @users = User.meta_search(params)
     respond_to do |f|
       f.json { render :json => api_respond(@users) }
       f.xml { render :xml => api_respond(@users) }

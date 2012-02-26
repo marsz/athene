@@ -54,3 +54,4 @@ gem "kaminari"
 gem "carrierwave"
 gem 'mini_magick'
 gem "fog"
+gem "meta_search"
