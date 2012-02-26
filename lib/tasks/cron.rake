@@ -2,14 +2,14 @@ seed_sites = [:wretch,:pixnet]
 namespace :cron do
   
   task :check_users_enabled_by_avatar => :environment do
-    User.enabled_checking_by_avatar.each do |user|
+    User.enabled_checking_by_avatar.limit(500).each do |user|
       p "check user #{user.id} enabled...."
       user.async_check_is_enabled
     end
   end
   
   task :check_users_enabled => :environment do
-    User.enabled_checking.each do |user|
+    User.enabled_checking.limit(10000).each do |user|
       puts "check user(#{user.id}) enabled..."
       user.async_check_is_enabled
     end
