@@ -1,14 +1,18 @@
 module Search::Posts
   extend ActiveSupport::Concern
   
+  include Search::Base
+  
   module ClassMethods
-    def searchable
-      scope :search, lambda{ |opts| do_search(opts) }
-    end
     
-    def do_search opts = {}
+    protected
+    
+    def do_search_scoped opts = {}
       paginates_per 50
-      posts = Post.includes([:user,:site]).page(opts[:page]).order("date DESC")
+      includes([:user,:site]).page(opts[:page]).order("date DESC") 
+    end
+    def do_search_by opts = {}
+      posts = Post.scoped
       if opts[:q]
         posts = posts.where("title LIKE ?", "%#{opts[:q]}%")
       end

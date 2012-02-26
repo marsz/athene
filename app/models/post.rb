@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   
   include Search::Posts
-  searchable
+  acts_as_searchable
 
   include ActAsTagsStripable
   act_as_tags_stripable :columns => [:title]

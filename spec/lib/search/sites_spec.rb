@@ -10,13 +10,14 @@ describe Search::Sites do
     hash.key?(:domain).should be_true
     hash.key?(:name).should be_true
   end
-  describe "search" do
+  describe "meta_search" do
     it ":site" do
       @site2 = Factory :site, :domain => :wretch
-      ids = Site.search(:site => :wretch).map{|p|p[:id]}
+      ids = Site.meta_search(:site => :wretch).map{|p|p[:id]}
       ids.size.should == 1
       ids.include?(@site2.id).should be_true
       ids.include?(@site.id).should be_false
     end
+    pending "params[:search]"
   end
 end

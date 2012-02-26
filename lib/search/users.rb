@@ -1,14 +1,19 @@
 module Search::Users
   extend ActiveSupport::Concern
   
+  include Search::Base
+  
   module ClassMethods
-    def searchable
+    
+    protected
+    
+    def do_search_scoped opts = {}
       paginates_per 100
-      scope :search, lambda{ |opts| do_search(opts) }
+      User.page(opts[:page])
     end
     
-    def do_search opts = {}
-      users = User.page(opts[:page])
+    def do_search_by opts = {}
+      users = User.scoped
       if opts[:site]
         site = Site.find_by_domain(opts[:site].to_s.downcase)
         users = users.where(:site_id => site ? site.id : 0)

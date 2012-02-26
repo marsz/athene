@@ -1,12 +1,13 @@
 module Search::Sites
   extend ActiveSupport::Concern
+
+  include Search::Base
   
   module ClassMethods
-    def searchable
-      scope :search, lambda{ |opts| do_search(opts) }
-    end
     
-    def do_search opts = {}
+    protected
+    
+    def do_search_by opts = {}
       sites = Site.scoped
       if opts[:site]
         site = Site.find_by_domain(opts[:site].to_s.downcase)

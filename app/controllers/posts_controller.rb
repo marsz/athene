@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     # TODO user is enable/disable
-    @posts = Post.search(params)
+    @posts = Post.meta_search(params)
     respond_to do |f|
       f.json { render :json => api_respond(@posts) }
       f.xml { render :xml => api_respond(@posts) }
