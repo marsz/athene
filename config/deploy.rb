@@ -32,7 +32,7 @@ namespace :deploy do
     run "touch #{current_path}/tmp/restart.txt"
   end
   task :symlink_shared, :roles => [:app] do
-    config_files = [:database,:medusa,:builder,:email,:exceptional,:resque,:fog]
+    config_files = [:database,:medusa,:builder,:email,:exceptional,:resque,:fog, :newrelic]
     symlink_hash = {}
     config_files.each do |fname|
       symlink_hash["#{shared_path}/config/#{fname}.yml"] = "#{release_path}/config/#{fname}.yml"
