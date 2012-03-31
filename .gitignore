@@ -11,3 +11,4 @@ config/email.yml
 config/exceptional.yml
 config/resque.yml
 config/fog.yml
+config/newrelic.yml
