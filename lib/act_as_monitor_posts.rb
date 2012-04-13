@@ -2,6 +2,8 @@ module ActAsMonitorPosts
   extend ActiveSupport::Concern
   include ActAsFetcher
   
+  MONITOR_POSTS_INTERVAL = 3.days
+  
   module Worker
     @queue = "monitor_posts"
     
@@ -20,7 +22,7 @@ module ActAsMonitorPosts
     
     def act_as_monitor_posts
       delegate :crawler, :to => :site
-      scope :posts_monitoring, where(:posts_monitoring_state => nil).where("monitored_at < ? OR monitored_at is null", Time.now-24.hours).order("monitored_at ASC")
+      scope :posts_monitoring, where(:posts_monitoring_state => nil).where("monitored_at < ? OR monitored_at is null", Time.now-MONITOR_POSTS_INTERVAL).order("monitored_at ASC")
       init_state_monitoring_posts
     end
     
