@@ -11,8 +11,8 @@ shared_examples_for "act_as_monitor_posts" do
   it "scoped: posts_monitoring" do
     @user.update_attributes :monitored_at => nil
     klass = @user.class
-    last_user = Factory :user,:site_id=>@site.id,:site_user_id=>"1234",:monitored_at => Time.now-25.hours
-    monitored_user = Factory :user,:site_id=>@site.id,:site_user_id=>"4321",:monitored_at => Time.now-2.hours
+    last_user = Factory :user,:site_id=>@site.id,:site_user_id=>"1234",:monitored_at => Time.now - (ActAsMonitorPosts::MONITOR_POSTS_INTERVAL_DAYS * 2).days
+    monitored_user = Factory :user,:site_id=>@site.id,:site_user_id=>"4321",:monitored_at => Time.now - 2.hours
     users = klass.posts_monitoring
     users.last.should == last_user
     users.first.should == @user
