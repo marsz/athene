@@ -4,9 +4,9 @@ urls_for_find_site:
   - "http://marsz.pixnet.net/blog"
   - "http://marsz.pixnet.net/blog/post/35208375"
 users_urls:
-  - "http://www.pixnet.net/blog/article/4/3"
-  - "http://www.pixnet.net/blog/article/4/3/hot"
-  - "http://www.pixnet.net/blog/article/4/3/hot/2"
+  - "http://www.pixnet.net/blog/articles/category/30"
+  - "http://www.pixnet.net/blog/articles/category/28"
+  - "http://www.pixnet.net/blog/articles/category/28/hot/2"
 user:
   site_user_id: "marsz"
 user_posts_over_limit: 40
