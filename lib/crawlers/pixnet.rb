@@ -25,27 +25,27 @@ class Crawlers::Pixnet
   end
   # monitor post end
   # monitor users start
-  def parse_site_user_id_from_url url
-    url.scan(/http:\/\/([^\.]+).pixnet.net/)[0][0].downcase rescue (url.scan(/http:\/\/([^\/]+)/)[0][0].downcase rescue nil)
+  def parse_site_user_id_from_url(url)
+    rules = [/http:\/\/([^\.]+).pixnet.net/, /\/blog\/profile\/([^\/]+)/, /http:\/\/([^\/]+)/]
+    rules.each do |rule|
+      tmps = url.scan(rule)
+      return tmps[0][0] if tmps.size > 0
+    end
+    nil
   end
   # monitor users end
   
   def seed_users_monitor_urls parser
     res = {}
-    RestClient.get("http://www.pixnet.net/blog").scan(/<li class="article\-list\-menu" id="article\-list\-menu\-[0-9]+"><a href="([^"]+)">(.+?)<\/a><\/li>/m).each do |tmps|
-      url = tmps[0].gsub("&amp;","&")
-      url = "http://www.pixnet.net#{url}" if !url.index("http://")
-      name = tmps[1]
-      sub_contents = fetch(url).scan(/<ul class="menu\-2">(.*?)<\/ul>/m)
-      if sub_contents.size > 0 
-        content = sub_contents[0][0]
-        reg_sub_urls = /<li><a href="([^"]+)">(.+?)<\/a>/m
-        content.scan(reg_sub_urls).each do |sub_tmps|
-          sub_url = sub_tmps[0].gsub("&amp;","&")
-          sub_url = "http://www.pixnet.net#{sub_url}" if !sub_url.index("http://")
-          sub_name = sub_tmps[1]
-          res["#{name}-#{sub_name}"] = sub_url
-        end
+    content = RestClient.get("http://www.pixnet.net/blog")
+    content.scan(/<a href="\/blog\/articles\/group\/[0-9]+">(.+?)<\/a>.*?<ul>(.+?)<\/ul>/m).each do |tmps|
+      name = tmps[0]
+      sub_content = tmps[1]
+      sub_content.scan(/<li><a href="\/blog\/([^"]+)">(.+?)<\/a><\/li>/m).each do |tmps|
+        url = "/blog/"+tmps[0].gsub("&amp;","&")
+        url = "http://www.pixnet.net#{url}" if !url.index("http://")
+        sub_name = tmps[1]
+        res["#{name}-#{sub_name}"] = url
       end
     end
     urls = []
@@ -71,7 +71,7 @@ class Crawlers::Pixnet
   
   def users_monitor_parser_hash
     {:label => "pixnet-user_monitor",
-     :regex => '/<li class="grid\-author"><a href="([^"]+)" target="_blank">(.+?)<\/a>/m'
+     :regex => '/<a href="([^"]+)" class="author"><img[^>]+>(.+?)<\/a>/m'
     }
   end
   def download_options

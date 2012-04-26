@@ -43,7 +43,7 @@ shared_examples_for "act_as_crawler" do
       end
       users = @crawler.monitor_users
       users.size.should > 0
-      users.each {|user| user.new_record?.should == false}
+      users.each { |user| user.new_record?.should == false }
       users.last.destroy
       @crawler.monitor_users.size.should >= 1
     end
