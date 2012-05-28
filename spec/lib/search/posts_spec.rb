@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Search::Posts do
   before do
-    @post = Factory :post, :title => "5fproisvertgoooooooood"
+    @post = FactoryGirl.create :post, :title => "5fproisvertgoooooooood"
   end
   it "#to_api_hash" do
     hash = @post.to_api_hash
@@ -13,15 +13,15 @@ describe Search::Posts do
   end
   describe "meta_search" do
     it ":q" do
-      post2 = Factory :post
+      post2 = FactoryGirl.create :post
       posts = Post.search_by(:q => "pro")
       posts.map{|p|p.id}.include?(@post.id).should be_true
       posts.map{|p|p.id}.include?(post2.id).should be_false
     end
     describe ":site" do
       before do
-        @site = Factory :site, :domain => :wretch
-        @posts = [Factory(:post, :site => @site), Factory(:post, :site => @site)]
+        @site = FactoryGirl.create :site, :domain => :wretch
+        @posts = [FactoryGirl.create(:post, :site => @site), FactoryGirl.create(:post, :site => @site)]
       end
       it "should match :site" do
         ids = Post.meta_search(:site => :wretch).map{|p|p[:id]}
@@ -30,14 +30,14 @@ describe Search::Posts do
         ids.include?(@post.id).should be_false
       end
       it ":post" do
-        post = Factory :post, :site => @site, :site_post_id => "12345"
+        post = FactoryGirl.create :post, :site => @site, :site_post_id => "12345"
         ids = Post.meta_search(:site => :wretch, :post => "12345").map{|p|p[:id]}
         ids.size.should == 1
         ids.include?(post.id).should be_true
       end
       it ":user" do
-        user = Factory :user, :site => @site, :site_user_id => "mmm123"
-        post = Factory :post, :site => @site, :user => user
+        user = FactoryGirl.create :user, :site => @site, :site_user_id => "mmm123"
+        post = FactoryGirl.create :post, :site => @site, :user => user
         ids = Post.meta_search(:site => :wretch, :user => "mmm123").map{|p|p[:id]}
         ids.size.should == 1
         ids.include?(post.id).should be_true

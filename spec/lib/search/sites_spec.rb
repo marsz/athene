@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Search::Sites do
   before do
-    @site = Factory :site
+    @site = FactoryGirl.create :site
   end
   it "#to_api_hash" do
     hash = @site.to_api_hash
@@ -12,7 +12,7 @@ describe Search::Sites do
   end
   describe "meta_search" do
     it ":site" do
-      @site2 = Factory :site, :domain => :wretch
+      @site2 = FactoryGirl.create :site, :domain => :wretch
       ids = Site.meta_search(:site => :wretch).map{|p|p[:id]}
       ids.size.should == 1
       ids.include?(@site2.id).should be_true

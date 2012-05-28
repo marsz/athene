@@ -59,6 +59,6 @@ task :tail_log, :roles => :app do
   run "tail -f #{shared_path}/log/#{rails_env}.log"
 end
 
-before "deploy:assets:symlink", "deploy:symlink_shared"
+after "bundle:install", "deploy:symlink_shared"
 after "deploy", "deploy:cleanup"
 after 'deploy:restart', 'deploy:restart_resque'

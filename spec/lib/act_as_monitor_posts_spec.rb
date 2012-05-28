@@ -5,14 +5,14 @@ shared_examples_for "act_as_monitor_posts" do
   before do
     @site = @crawler.seed_site
     @data = factory_by_domain(@site.domain)
-    @user = Factory :user, @data[:user].merge(:site_id=>@site.id)
+    @user = FactoryGirl.create :user, @data[:user].merge(:site_id=>@site.id)
   end
 
   it "scoped: posts_monitoring" do
     @user.update_attributes :monitored_at => nil
     klass = @user.class
-    last_user = Factory :user,:site_id=>@site.id,:site_user_id=>"1234",:monitored_at => Time.now - (ActAsMonitorPosts::MONITOR_POSTS_INTERVAL_DAYS * 2).days
-    monitored_user = Factory :user,:site_id=>@site.id,:site_user_id=>"4321",:monitored_at => Time.now - 2.hours
+    last_user = FactoryGirl.create :user,:site_id=>@site.id,:site_user_id=>"1234",:monitored_at => Time.now - (ActAsMonitorPosts::MONITOR_POSTS_INTERVAL_DAYS * 2).days
+    monitored_user = FactoryGirl.create :user,:site_id=>@site.id,:site_user_id=>"4321",:monitored_at => Time.now - 2.hours
     users = klass.posts_monitoring
     users.last.should == last_user
     users.first.should == @user
@@ -70,7 +70,7 @@ shared_examples_for "act_as_monitor_posts" do
   end
   
   it "monitor posts bad user" do
-    bad_user = Factory :user,:site_id=>@site.id,:site_user_id=>"marsz1234",:monitored_at => nil
+    bad_user = FactoryGirl.create :user,:site_id=>@site.id,:site_user_id=>"marsz1234",:monitored_at => nil
     bad_user.monitor_posts.size.should == 0
     bad_user.monitored_at.should == nil
   end
