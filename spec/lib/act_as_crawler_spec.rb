@@ -39,7 +39,7 @@ shared_examples_for "act_as_crawler" do
     end
     it "monitor_users" do
       @users_urls.each_with_index do |url, index|
-        Factory :users_monitor_url, :url => url, :parser_id => @users_monitor_parser.id, :label => "url #{index}", :site_id => @site.id
+        FactoryGirl.create :users_monitor_url, :url => url, :parser_id => @users_monitor_parser.id, :label => "url #{index}", :site_id => @site.id
       end
       users = @crawler.monitor_users
       users.size.should > 0
@@ -51,7 +51,7 @@ shared_examples_for "act_as_crawler" do
   
   describe "monitor posts" do
     before do
-      @user = Factory :user, :site_id => @site.id, :site_user_id => @data[:user][:site_user_id]
+      @user = FactoryGirl.create :user, :site_id => @site.id, :site_user_id => @data[:user][:site_user_id]
       # @posts_urls_size = @data[:user][:posts_page_size]
       @posts_urls = @data[:posts_urls]
       @post_urls = @data[:post_urls]
@@ -61,7 +61,7 @@ shared_examples_for "act_as_crawler" do
     
     it "fetch_posts_by_user" do
       @crawler.fetch_posts_by_user(@user, 1).first.id.should_not == @crawler.fetch_posts_by_user(@user, 2).first.id
-      bad_user = Factory :user, :site_id => @site.id, :site_user_id => "mmaarrsszz333300"
+      bad_user = FactoryGirl.create :user, :site_id => @site.id, :site_user_id => "mmaarrsszz333300"
       @crawler.fetch_posts_by_user(bad_user).should == nil
     end
     
@@ -115,14 +115,14 @@ shared_examples_for "act_as_crawler" do
   end
   
   it "#url_user" do
-    user = Factory :user, :site => @site
+    user = FactoryGirl.create :user, :site => @site
     url = @crawler.url_user(user)
     url.should be_a_kind_of(String)
     url.length.should > 0
   end
   
   it "#parse_user_avatar_url" do
-    user = Factory :user, :site => @site, :site_user_id => @data[:user][:site_user_id]
+    user = FactoryGirl.create :user, :site => @site, :site_user_id => @data[:user][:site_user_id]
     url = @crawler.url_user user
     content = fetch(url)
     @crawler.parse_user_avatar_url(content, user).should_not be_nil

@@ -16,11 +16,11 @@ describe User do
   
   describe "uniqueness of site_user_id without case sensitive" do
     before do
-      @site = Factory :site
-      @user = Factory :user, :site_user_id => "ABC", :site => @site
+      @site = FactoryGirl.create :site
+      @user = FactoryGirl.create :user, :site_user_id => "ABC", :site => @site
     end
     it "should not be saved" do
-      user = Factory :user, :site_user_id => "aa", :site => @site
+      user = FactoryGirl.create :user, :site_user_id => "aa", :site => @site
       user.site_user_id = "abc"
       user.save.should be_false
     end

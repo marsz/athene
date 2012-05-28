@@ -23,11 +23,11 @@ shared_examples_for "act_as_user_checker" do
   
   describe "scope enabled_checking" do
     before do 
-      @check_users = [Factory(:user_for_check, :checked_at => nil), Factory(:user_for_check)]
+      @check_users = [FactoryGirl.create(:user_for_check, :checked_at => nil), FactoryGirl.create(:user_for_check)]
       @un_check_users = [
-        Factory(:user_for_check, :check_state => "queuing"),
-        Factory(:user_for_check, :check_state => "checking"),
-        Factory(:user_for_check, :checked_at => Time.now-(User::CHECK_WITHIN_DAYS-1).day),
+        FactoryGirl.create(:user_for_check, :check_state => "queuing"),
+        FactoryGirl.create(:user_for_check, :check_state => "checking"),
+        FactoryGirl.create(:user_for_check, :checked_at => Time.now-(User::CHECK_WITHIN_DAYS-1).day),
       ]
     end
     it "should include and not included users" do
@@ -83,9 +83,9 @@ describe "all included class" do
   
   describe User do
     before do
-      @site = Site.find_by_domain("wretch") || Factory(:site, :domain => "wretch")
-      @user = Factory :user, :site => @site, :site_user_id => "marsz"
-      @user_should_disable = Factory :user_should_disabled, :site_id => @site.id
+      @site = Site.find_by_domain("wretch") || FactoryGirl.create(:site, :domain => "wretch")
+      @user = FactoryGirl.create :user, :site => @site, :site_user_id => "marsz"
+      @user_should_disable = FactoryGirl.create :user_should_disabled, :site_id => @site.id
       @user_should_enable = @user
     end
     

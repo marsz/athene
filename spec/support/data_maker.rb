@@ -1,10 +1,10 @@
 module DataMaker
   def init_all_data
-    @site = Factory(:site, :domain => "wretch")
-    @user = Factory(:user, :site_id => @site.id)
-    @post = Factory(:post, :user_id => @user.id)
-    @users_monitor_parser = Factory(:users_monitor_parser, :site_id => @site.id)
-    @users_monitor_url = Factory(:users_monitor_url, :site_id => @site.id, :parser_id => @users_monitor_parser.id)
+    @site = FactoryGirl.create(:site, :domain => "wretch")
+    @user = FactoryGirl.create(:user, :site_id => @site.id)
+    @post = FactoryGirl.create(:post, :user_id => @user.id)
+    @users_monitor_parser = FactoryGirl.create(:users_monitor_parser, :site_id => @site.id)
+    @users_monitor_url = FactoryGirl.create(:users_monitor_url, :site_id => @site.id, :parser_id => @users_monitor_parser.id)
   end
   
   def factory_by_domain domain

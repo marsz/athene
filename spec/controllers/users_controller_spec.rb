@@ -8,21 +8,21 @@ describe UsersController do
   
   describe "post create" do
     before do
-      @site = Factory :site, :domain => :wretch
+      @site = FactoryGirl.create :site, :domain => :wretch
     end
     it "should be created with :site & :user" do
       post :create, :site => @site.domain, :user => "marsz"
       response.should redirect_to(user_path(assigns[:user]))
     end
     it "should not be created with exists data" do
-      user = Factory :user, :site_user_id => "marsz", :site => @site
+      user = FactoryGirl.create :user, :site_user_id => "marsz", :site => @site
       post :create, :site => @site.domain, :user => user.site_user_id
       hash = ActiveSupport::JSON.decode(response.body)
       hash.key?("user").should be_true
       hash["user"]["id"].should == user.id
     end
     it "should not be created with upper case exists data" do
-      user = Factory :user, :site_user_id => "MARSZ", :site => @site
+      user = FactoryGirl.create :user, :site_user_id => "MARSZ", :site => @site
       post :create, :site => @site.domain, :user => user.site_user_id
       hash = ActiveSupport::JSON.decode(response.body)
       hash.key?("user").should be_true
@@ -36,7 +36,7 @@ describe UsersController do
   
   describe "get show" do
     before do
-      @user = Factory :user
+      @user = FactoryGirl.create :user
     end
     it "exists user" do
       get :show, :id => @user.id
@@ -54,7 +54,7 @@ describe UsersController do
       search(opts)[:users]
     end
     before do
-      @user = Factory :user, :site_user_id => "5fproisvertgoooooooood"
+      @user = FactoryGirl.create :user, :site_user_id => "5fproisvertgoooooooood"
     end
     it "json output" do
       result = search
@@ -67,14 +67,14 @@ describe UsersController do
     end
     describe "with params[:site]" do
       before do
-        @site = Factory :site, :domain => :wretch
-        @user = [Factory(:user, :site => @site), Factory(:user, :site => @site)]
+        @site = FactoryGirl.create :site, :domain => :wretch
+        @user = [FactoryGirl.create(:user, :site => @site), FactoryGirl.create(:user, :site => @site)]
       end
       it "params[:site]" do
         should_match_querys User, :site => :wretch
       end
       it "params[:user]" do
-        user = Factory :user, :site => @site, :site_user_id => "mmm123"
+        user = FactoryGirl.create :user, :site => @site, :site_user_id => "mmm123"
         should_match_querys User, :site => :wretch, :user => "mmm123"
       end
     end

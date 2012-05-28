@@ -16,7 +16,7 @@ describe Post do
   it {should validate_presence_of(:title)}
   
   it "sync_site_id" do
-    site_another = Factory :site_another
+    site_another = FactoryGirl.create :site_another
     @post.site_id = site_another.id
     @post.save
     (@post.site_id == @site.id).should == true

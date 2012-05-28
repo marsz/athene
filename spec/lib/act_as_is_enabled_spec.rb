@@ -45,7 +45,7 @@ describe "all included class" do
   describe User do
     before do
       @obj = @user
-      @obj_last = Factory :user_disabled, :site_id => @site.id
+      @obj_last = FactoryGirl.create :user_disabled, :site_id => @site.id
     end
     
     it_should_behave_like "act_as_is_enabled"

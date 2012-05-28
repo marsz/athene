@@ -10,7 +10,7 @@ FactoryGirl.define do
 
   factory :user do
     site do
-      Factory :site
+      FactoryGirl.create :site
     end
     sequence(:site_user_id) { |n| "marsz#{n}" }
     name "MarsZ Chen"
@@ -33,7 +33,7 @@ FactoryGirl.define do
 
   factory :post do
     user do
-      Factory(:user)
+      FactoryGirl.create(:user)
     end
     sequence(:site_post_id) {|n| "123#{n}"}
     title "hahahah"
