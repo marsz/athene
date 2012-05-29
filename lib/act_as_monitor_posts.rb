@@ -22,7 +22,7 @@ module ActAsMonitorPosts
     
     def act_as_monitor_posts
       delegate :crawler, :to => :site
-      scope :posts_monitoring, where(:posts_monitoring_state => nil).where("monitored_at < ? OR monitored_at is null", Time.now - MONITOR_POSTS_INTERVAL_DAYS.days).order("monitored_at ASC")
+      scope :posts_monitoring, non_blacklist.where(:posts_monitoring_state => nil).where("monitored_at < ? OR monitored_at is null", Time.now - MONITOR_POSTS_INTERVAL_DAYS.days).order("monitored_at ASC")
       init_state_monitoring_posts
     end
     

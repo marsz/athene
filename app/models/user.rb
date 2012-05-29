@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  scope :blacklist, where(:is_black => true)
+  scope :non_blacklist, where(:is_black => false)
+  
   include Search::Users
   acts_as_searchable
 

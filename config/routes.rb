@@ -3,7 +3,12 @@ Athene::Application.routes.draw do
   mount Resque::Server.new, :at => "/admin/resque"
   match "reports" => "reports#index", :via => :get
   resources :posts
-  resources :users
+  resources :users do
+    member do
+      post :is_black, :to => "users#is_black_true"
+      delete :is_black, :to => "users#is_black_false"
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
