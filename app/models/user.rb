@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  scope :blacklist, where(:is_black => true)
+  scope :non_blacklist, where(:is_black => false)
+  
   include Search::Users
   acts_as_searchable
 
@@ -20,7 +23,6 @@ class User < ActiveRecord::Base
   validates_presence_of :site_user_id
   validates_format_of :site_user_id, :with => /\A[^\n\/\?>< ]+\z/
   has_many :posts, :order => "date DESC,datetime DESC", :dependent => :destroy
-  scope :blacklist, where(:is_black => true)
   
   def self.new_by_url(url, hash = {})
     if site = (hash[:site] || Site.find_by_url(url))

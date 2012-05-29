@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20120529021553) do
     t.integer  "posts_count"
     t.string   "posts_monitoring_state"
     t.boolean  "is_enabled"
-    t.boolean  "is_black"
+    t.boolean  "is_black",               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

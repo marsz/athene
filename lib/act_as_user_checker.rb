@@ -24,8 +24,8 @@ module ActAsUserChecker
         after_create :async_check_is_enabled
       end
       
-      scope :enabled_checking, where(:check_state => "idle").where('checked_at < ? OR checked_at is null', Time.now-CHECK_WITHIN_DAYS.days)
-      scope :enabled_checking_by_avatar, where(:check_state => "idle", :avatar => nil, :is_enabled => true)
+      scope :enabled_checking, non_blacklist.where(:check_state => "idle").where('checked_at < ? OR checked_at is null', Time.now-CHECK_WITHIN_DAYS.days)
+      scope :enabled_checking_by_avatar, non_blacklist.where(:check_state => "idle", :avatar => nil, :is_enabled => true)
       
       init_check_state
     end

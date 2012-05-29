@@ -7,7 +7,7 @@ module ActAsUserAvatar
       if !self.method_defined?(:crawler)
         delegate :crawler, :to => :site
       end
-      scope :no_avatar, where(:avatar => nil)
+      scope :no_avatar, non_blacklist.where(:avatar => nil)
     end
   end
   

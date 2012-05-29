@@ -16,6 +16,7 @@ FactoryGirl.define do
     name "MarsZ Chen"
     url "http://blog.marsz.tw"
     is_enabled true
+    is_black false
     check_state "idle"
     factory :user_for_check do
       check_state "idle"
