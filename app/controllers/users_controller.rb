@@ -40,7 +40,27 @@ class UsersController < ApplicationController
     end
   end
   
+  def is_black_true
+    @user = User.find(params[:id])
+    update_user(@user, :is_black => true)
+  end
+  
+  def is_black_false
+    @user = User.find(params[:id])
+    update_user(@user, :is_black => false)
+  end
+  
   private
+  
+  def update_user(user, attributes)
+    user.update_attributes(attributes)
+    respond_to do |f|
+      f.html { render :text => {:user => api_respond(user)}.to_json }
+      f.json { render :json => {:user => api_respond(user)}.to_json }
+      f.xml { render :xml => {:user => api_respond(user)}.to_xml }
+    end
+  end
+  
   def api_respond users
     if users.is_a?(User)
       users.to_api_hash.merge(:site => users.site.to_api_hash)
