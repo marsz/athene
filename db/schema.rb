@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219071646) do
+ActiveRecord::Schema.define(:version => 20120529021553) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120219071646) do
     t.integer  "posts_count"
     t.string   "posts_monitoring_state"
     t.boolean  "is_enabled"
+    t.boolean  "is_black"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
