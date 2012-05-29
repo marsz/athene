@@ -25,6 +25,10 @@ FactoryGirl.define do
       site_user_id "user-disabled"
       is_enabled false
     end
+    factory :user_black do
+      is_enabled false
+      is_black true
+    end
     factory :user_should_disabled do
       site_user_id "marsz0330marsz"
       is_enabled false
