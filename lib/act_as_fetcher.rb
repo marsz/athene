@@ -31,7 +31,6 @@ module ActAsFetcher
       begin
         ActiveSupport::JSON.decode(RestClient.method(method).call(request_url, params))
       rescue => e
-        logger.info "error: #{e.inspect}"
         ""
       end
     end
