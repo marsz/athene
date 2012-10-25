@@ -34,12 +34,13 @@ class Crawlers::Wretch
       reg_sub_urls = /<li ><a href="[^\*]+?\*([^"]+)">(.+?)<\/a>/
       url = tmps[0].gsub("&amp;","&")
       name = tmps[1]
-      content = fetch(url)
-      content.scan(reg_sub_urls).each do |sub_tmps|
-        sub_url = sub_tmps[0].gsub("&amp;","&")
-        sub_name = sub_tmps[1]
-        res["#{name}-#{sub_name}"] = sub_url
-      end
+      res[name] = url
+      # content = fetch(url)
+      # content.scan(reg_sub_urls).each do |sub_tmps|
+      #   sub_url = sub_tmps[0].gsub("&amp;","&")
+      #   sub_name = sub_tmps[1]
+      #   res["#{name}-#{sub_name}"] = sub_url
+      # end
     end
     urls = []
     res.each do |label, url|
